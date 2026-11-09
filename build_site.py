@@ -60,9 +60,9 @@ PAINTINGS = [("p06", "Wood-collage cat"), ("p03", "Black cat, red ears"), ("p01"
              ("p05", "Two cats, sunglasses"), ("p08", "Two cats at the bar"),
              ("p09", "Blue geometric cat"), ("p10", "Fat blue striped cat")]
 
-VIDEOS = [("5Si-w321k68", "Tiltott Szerelem", "Császár Előd x Lotfi Begi feat Nika"),
+VIDEOS = [("RMMwct1Lm44", "Panic Attack", "Shane 54 x Alex Sonata & TheRio"),
           ("LJda5fIwFnw", "Personal Jesus", "Cubicore feat Shane 54"),
-          ("RMMwct1Lm44", "Panic Attack", "Shane 54 x Alex Sonata & TheRio"),
+          ("5Si-w321k68", "Tiltott Szerelem", "Császár Előd x Lotfi Begi feat Nika"),
           ("YNprCkN3OY8", "Kócos", "Zséda"),
           ("9UwBUl_kPkE", "Az Első És Utolsó", "New Level Empire x Curtis"),
           ("7aUA37jTRuo", "Startup", "Honeybeast")]
