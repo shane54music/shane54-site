@@ -8,7 +8,7 @@ Használat:
 Kimenet: site_src/episodes.json és site_src/ep/001.jpg ...
 Sorrend: fájlnév szerint növekvő (a lejátszó a legújabbat mutatja elöl, ha kell, fordítsd: --reverse).
 """
-import sys, os, json, io, glob
+import sys, os, json, io, glob, re
 from mutagen.mp3 import MP3
 from mutagen.id3 import ID3
 from PIL import Image
@@ -31,8 +31,22 @@ for i, f in enumerate(files, 1):
         t = {}
     title = str(t["TIT2"]) if "TIT2" in t else os.path.splitext(os.path.basename(f))[0]
     sub = str(t["TPE1"]) if "TPE1" in t else ""
-    if "TDRC" in t:
-        sub = (sub + " · " if sub else "") + str(t["TDRC"])
+    tracks = []
+    for k, v in t.items():
+        if k.startswith("COMM"):
+            for ln in "\n".join(v.text).splitlines():
+                mm = re.match(r"\s*\d+\.\s*(.*?)(?:\s+((?:\d+:)?\d{1,2}:\d{2}))?\s*$", ln)
+                if not mm or not mm.group(1):
+                    continue
+                ts = mm.group(2)
+                sec = None
+                if ts:
+                    p = [int(x) for x in ts.split(":")]
+                    sec = p[0] * 60 + p[1] if len(p) == 2 else p[0] * 3600 + p[1] * 60 + p[2]
+                elif not tracks:
+                    sec = 0
+                tracks.append({"t": sec, "n": mm.group(1).strip()})
+            break
     art = ""
     pics = [v for k, v in t.items() if k.startswith("APIC")] if t else []
     if pics:
@@ -41,7 +55,7 @@ for i, f in enumerate(files, 1):
         art = f"ep/{i:03d}.jpg"
         im.save(os.path.join(out, art), quality=82, optimize=True)
     eps.append({"title": title, "sub": sub, "file": os.path.basename(f),
-                "dur": round(m.info.length), "art": art})
+                "dur": round(m.info.length), "art": art, "tracks": tracks})
     print(i, title, "| borító:", bool(art))
 json.dump({"ia": ia, "episodes": eps}, open(os.path.join(out, "episodes.json"), "w"),
           ensure_ascii=False, indent=1)

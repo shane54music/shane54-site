@@ -47,7 +47,7 @@
   function parse(j) {
     var base = j.base || ('https://archive.org/download/' + j.ia + '/');
     return (j.episodes || []).map(function (e) {
-      return { title: e.title, sub: e.sub || '', dur: e.dur || 0, art: e.art ? BASE + 'assets/' + e.art : null,
+      return { title: e.title, sub: e.sub || '', tracks: e.tracks || [], dur: e.dur || 0, art: e.art ? BASE + 'assets/' + e.art : null,
         src: base + e.file.split('/').map(encodeURIComponent).join('/') };
     });
   }
@@ -74,7 +74,7 @@
       '<input class="pl-bar" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek"><div class="pl-times"><span class="sh-cur">0:00</span><span class="sh-dur">0:00</span></div>' +
       '<div class="sh-ctl"><button class="sh-spd" aria-label="Speed">1×</button><button class="ib sh-prev" aria-label="Previous">' + IC.prev + '</button><button class="ib sh-b15" aria-label="-15s">' + IC.back + '</button>' +
       '<button class="ib main sh-play" aria-label="Play/Pause"></button><button class="ib sh-f30" aria-label="+30s">' + IC.fwd + '</button><button class="ib sh-next" aria-label="Next">' + IC.next + '</button></div></div>' +
-      '<div class="sh-list"></div>';
+      '<details class="sh-tr"><summary>Tracklist</summary><ol></ol></details><div class="sh-list"></div>';
     $('.dk-info', dock).onclick = openSheet;
     $('.dk-play', dock).onclick = toggle; $('.dk-next', dock).onclick = next;
     $('.sh-close', sheet).onclick = closeSheet;
@@ -126,6 +126,20 @@
     if (e) {
       $('.dk-art', dock).src = art(e); $('.dk-t b', dock).textContent = e.title; $('.dk-t s', dock).textContent = e.sub;
       $('.sh-art', sheet).src = art(e); $('.sh-title', sheet).textContent = e.title; $('.sh-sub', sheet).textContent = e.sub;
+    }
+    var tr = $('.sh-tr', sheet);
+    if (tr) {
+      var ol = $('ol', tr), tk = (e && e.tracks) || [];
+      if (ol.getAttribute('data-i') !== String(P.cur)) {
+        ol.setAttribute('data-i', P.cur); ol.innerHTML = '';
+        tk.forEach(function (x) {
+          var li = document.createElement('li'), b = document.createElement('button');
+          b.innerHTML = '<i></i><span></span>'; b.firstChild.textContent = x.t == null ? '' : fmt(x.t); b.lastChild.textContent = x.n;
+          if (x.t == null) b.disabled = true; else b.onclick = function () { if (A.duration || true) A.currentTime = x.t; };
+          li.appendChild(b); ol.appendChild(li);
+        });
+      }
+      tr.hidden = !tk.length;
     }
     $('.dk-play', dock).innerHTML = playing ? IC.pause : IC.play;
     $('.sh-play', sheet).innerHTML = playing ? IC.pause : IC.play;

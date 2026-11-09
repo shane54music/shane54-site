@@ -215,6 +215,12 @@ html.sheet-open{overflow:hidden}
 .sh-ctl{display:flex;align-items:center;justify-content:center;gap:4px;margin:2px 0 6px}
 .sh-ctl .main{width:56px;height:56px}
 .sh-spd{width:48px;height:36px;border:2px solid #5ad1ff;border-radius:999px;background:none;color:#5ad1ff;font:inherit;font-weight:700;font-size:13px;margin-right:4px;cursor:pointer}
+.sh-tr{flex:none;border-top:1px solid #2a2a2a;padding:0 12px}
+.sh-tr summary{min-height:44px;display:flex;align-items:center;font-size:13px;font-weight:700;letter-spacing:.08em;color:#5ad1ff;cursor:pointer}
+.sh-tr ol{list-style:none;margin:0 0 8px;padding:0;max-height:34vh;overflow:auto}
+.sh-tr button{display:flex;gap:10px;width:100%;min-height:36px;align-items:baseline;text-align:left;background:none;border:0;color:#ddd;font:inherit;font-size:13px;line-height:1.3;padding:6px 0;cursor:pointer}
+.sh-tr button:disabled{cursor:default;color:#999}
+.sh-tr i{font-style:normal;color:#5ad1ff;min-width:44px;font-variant-numeric:tabular-nums}
 .sh-list{flex:1;overflow:auto;border-top:1px solid #2a2a2a;-webkit-overflow-scrolling:touch;padding-bottom:env(safe-area-inset-bottom)}
 .eplist{margin-top:8px;border-top:1px solid #2a2a2a}
 .ep{display:flex;width:100%;align-items:center;gap:10px;min-height:56px;padding:6px 12px;border:0;border-bottom:1px solid #1f1f1f;background:transparent;color:#fff;text-align:left;font:inherit;cursor:pointer}
