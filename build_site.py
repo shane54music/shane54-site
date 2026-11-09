@@ -67,17 +67,43 @@ VIDEOS = [("5Si-w321k68", "Tiltott Szerelem", "Császár Előd x Lotfi Begi feat
           ("9UwBUl_kPkE", "Az Első És Utolsó", "New Level Empire x Curtis"),
           ("7aUA37jTRuo", "Startup", "Honeybeast")]
 
-DISCO = [("2007", "1000 Lullabies", "Shah-Music Digital", "DIGITAL"),
-         ("2006", "Laptop DJ", "EMI", "ALBUM"),
-         ("2006", "Altass El (feat. Mester Tamás)", "EMI", "PROMO"),
-         ("2005", "Kippenvelmeter (vs Abel Ramos)", "DTF Spain", "SINGLE"),
-         ("2005", "Futuristic (Van Eyden & Hampshire feat. Shane 54)", "Flux Delux", "SINGLE"),
-         ("2004", "VV3", "M-RTL Rt.", "SINGLE"),
-         ("2004", "My Way", "Boring Records", "ALBUM"),
-         ("2004", "Back From Your Past (Misja Helsloot feat. Shane 54)", "First Second Records", "SINGLE"),
-         ("2003", "69 Remixes (DJ Junior & Shane 54 feat. Michelle Wild)", "–", "PROMO"),
-         ("2002", "Souvenir De Chine", "Afterglow Records", "SINGLE"),
-         ("2002", "Equinoxe 4", "DTF Recordings", "SINGLE")]
+MYON = [("–", "Round We Go", "Myon & Shane 54 x Haley", "", "TRACK"),
+        ("2015", "Wicked Game", "", "Ride Recordings", "TRACK"),
+        ("2014", "Under Your Cloud", "Myon & Shane 54 + Late Night Alumni", "Ride Recordings", "SINGLE"),
+        ("2014", "If I Fall (Remixes)", "Cole Plante feat. Myon & Shane 54 & Ruby O'Dell", "Hollywood Records", "EP"),
+        ("2014", "Summer Of Love", "Myon & Shane 54 + Kyler England", "Ride Recordings", "TRACK"),
+        ("2013", "Strangers", "Seven Lions with Myon & Shane 54 feat. Tove Lo", "Casablanca", "SINGLE"),
+        ("2013", "In Search Of Sunrise 11: Las Vegas", "Richard Durand with Myon & Shane 54", "Songbird", "MIX"),
+        ("2013", "Lie To Me", "Cole Plante with Myon & Shane 54 feat. Koko Laroo", "Teknicole", "TRACK"),
+        ("2013", "Lights", "Myon & Shane 54 with Aruna", "Ride Recordings", "TRACK"),
+        ("2013", "Outshine", "Myon & Shane 54 with Natalie Peris", "Ride Recordings", "TRACK"),
+        ("2013", "Hurricane", "Myon & Shane 54 with Amy Pearson", "Ride Recordings", "TRACK"),
+        ("2013", "Éjjel-Nappal Budapest", "Myon & Shane 54 feat. Tóth Gabi", "Ride Recordings", "TRACK"),
+        ("2012", "International Departures, Vol. 2 - Summer Of Love", "Myon & Shane 54", "Armada Digital", "COMP"),
+        ("2011", "Futuristic", "Myon & Shane 54", "Armind", "SINGLE"),
+        ("2011", "International Departures", "Myon & Shane 54", "Armind", "TRACK"),
+        ("2010", "International Departures Soundtracks", "Myon & Shane 54", "Armada Digital", "COMP"),
+        ("2010", "Ibiza Sunrise", "Myon & Shane 54 feat. Labworks", "Armind", "TRACK"),
+        ("2009", "Helpless", "Myon & Shane 54 feat. Aruna", "S107 Recordings", "TRACK"),
+        ("2009", "All Night Rock And Roll", "", "Jigsaw Digital", "TRACK"),
+        ("2008", "Not A Lot Left / The Beach", "Myon & Shane 54", "Anjunabeats", "SINGLE"),
+        ("2008", "Trapped", "Myon & Shane 54", "In Trance We Trust", "SINGLE"),
+        ("2008", "Vampire", "Myon & Shane 54 feat. Carrie Skipper", "Armind", "TRACK")]
+
+SOLO = [("2007", "1000 Lullabies", "", "Shah-Music Digital", "DIGITAL"),
+        ("2006", "Laptop DJ", "", "EMI", "ALBUM"),
+        ("2006", "Altass El", "Shane 54 feat. Mester Tamás", "EMI", "PROMO"),
+        ("2005", "Kippenvelmeter", "Shane 54 vs Abel Ramos", "DTF Spain", "SINGLE"),
+        ("2005", "Futuristic", "Van Eyden & Hampshire feat. Shane 54", "Flux Delux", "SINGLE"),
+        ("2004", "VV3", "", "M-RTL Rt.", "SINGLE"),
+        ("2004", "My Way", "", "Boring Records", "ALBUM"),
+        ("2004", "Back From Your Past", "Misja Helsloot feat. Shane 54", "First Second Records", "SINGLE"),
+        ("2003", "69 Remixes", "DJ Junior & Shane 54 feat. Michelle Wild", "", "PROMO"),
+        ("2002", "Souvenir De Chine", "", "Afterglow Records", "SINGLE"),
+        ("2002", "Equinoxe 4", "", "DTF Recordings", "SINGLE")]
+
+DISCO = [("MYON & SHANE 54 · 2008–2015", "https://www.discogs.com/artist/1239503-Myon-Shane-54", MYON),
+         ("SHANE 54 · 2002–2007", DISCOGS, SOLO)]
 
 CSS = """
 :root{--bg:#111;--fg:#fff;--mut:#bbb}
@@ -261,14 +287,18 @@ def build_plugins(lang):
 
 def build_music(lang):
     subs = [(T["bio"][lang], "#bio"), (T["disco"][lang], "#disco"), (T["id"][lang], "#id")]
-    rows = "".join(f'<div class="r"><span class="y">{y}</span><span class="n"><b>{e(t)}</b><s>{e(l)}</s></span><span class="tag">{k}</span></div>' for y, t, l, k in DISCO)
+    rows = ""
+    for head, link, items in DISCO:
+        rows += f'<div style="font-size:12px;font-weight:700;letter-spacing:.14em;color:#bbb;padding:28px 0 8px">{head}</div>'
+        for y, t, c, l, k in items:
+            sub = " · ".join(x for x in (c, l) if x)
+            rows += f'<div class="r"><span class="y">{y}</span><span class="n"><b>{e(t)}</b><s>{e(sub)}</s></span><span class="tag">{k}</span></div>'
+        rows += f'<a class="btn" style="border:2px solid #5ad1ff;margin-top:12px" href="{link}">Discogs →</a>'
     body = (top(lang, "music", subs, 2) +
             '<section id="disco" class="pad sp" style="padding-top:20px">'
             f'<iframe src="https://open.spotify.com/embed/artist/{SPOTIFY}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify"></iframe></section>'
             f'<section id="bio" class="pad" style="padding-top:24px"><h1 class="t">MUSIC</h1><p class="bio">{e(CONTENT["music_bio"][lang])}</p></section>'
-            f'<section class="pad" style="padding-bottom:0"><div style="font-size:12px;font-weight:700;letter-spacing:.14em;color:#bbb">DISCOGS · 2002–2007</div></section>'
             f'<div class="disc">{rows}</div>'
-            f'<section class="pad" style="padding-top:12px"><a class="btn" style="border:2px solid #5ad1ff" href="{DISCOGS}">{T["discogs_full"][lang]}</a></section>'
             f'<section id="id" class="pad"><a class="idc" href="id/"><b>INTERNATIONAL<br>DEPARTURES</b><span style="font-size:22px">→</span></a></section>'
             + foot())
     return page(lang, "music/", "Music — Shane 54", body, ACCENT["music"], up=2)
