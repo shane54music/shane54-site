@@ -186,11 +186,9 @@ footer{padding:32px 20px 40px;font-size:13px;color:var(--mut);display:flex;justi
 .bio+.bio{margin-top:16px}
 /* podcast player */
 #idplayer{border:2px solid #5ad1ff;border-radius:18px;padding:16px;background:#0b0b0b}
-.pl-top{display:flex;gap:14px;align-items:center}
-.pl-cover{width:84px;height:84px;border-radius:12px;background:#5ad1ff;color:#111;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .3s}
-.pl-cover b{font-family:'Bowlby One',sans-serif;font-weight:400;font-size:34px}
-.playing .pl-cover{transform:rotate(-4deg) scale(1.04)}
-.pl-meta{min-width:0}.pl-meta small{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;color:#5ad1ff}
+.pl-logo{display:block;width:100%;max-width:320px;height:auto;margin:0 auto 14px;border-radius:12px;transition:transform .3s}
+.playing .pl-logo{transform:scale(1.015)}
+.pl-meta{min-width:0;text-align:center}.pl-meta small{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;color:#5ad1ff}
 .pl-title{margin:4px 0 2px;font-size:20px;line-height:1.2;font-weight:700}
 .pl-sub{font-size:13px;color:#bbb}
 .pl-bar{-webkit-appearance:none;appearance:none;width:100%;height:44px;margin:12px 0 0;background:transparent;--p:0%}
@@ -374,7 +372,7 @@ def build_music(lang):
             f'<iframe src="https://open.spotify.com/embed/artist/{SPOTIFY}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify"></iframe></section>'
             f'<section id="bio" class="pad" style="padding-top:24px"><h1 class="t">MUSIC</h1>{"".join(f'<p class="bio">{e(t)}</p>' for t in CONTENT["music_bio"][lang])}</section>'
             f'<div class="disc">{rows}</div>'
-            f'<section id="id" class="pad"><a class="idc" href="id/"><b>INTERNATIONAL<br>DEPARTURES</b><span style="font-size:22px">→</span></a></section>'
+            f'<section id="id" class="pad"><a class="idc" href="id/"><img src="../../assets/img/id_text.png" alt="International Departures with Shane 54" style="display:block;width:78%;height:auto"><span style="font-size:22px">→</span></a></section>'
             + foot())
     return page(lang, "music/", "Music — Shane 54", body, ACCENT["music"], up=2)
 
@@ -385,7 +383,7 @@ def build_id(lang):
     subs_html = subs_html.replace('<a href="#">ID</a>', '<a href="#" class="on">ID</a>').replace('<a href="../#bio" class=on>', '<a href="../#bio">')
     body = (subs_html +
             f'<section class="pad"><a href="../" style="display:flex;align-items:center;min-height:44px;font-size:14px;font-weight:700;color:#5ad1ff">{T["back"][lang]}</a>'
-            f'<h1 class="t" style="font-size:38px;margin-top:8px">INTERNATIONAL DEPARTURES</h1><p class="bio">{e(CONTENT["id_bio"][lang])}</p>'
+            f'<h1 style="margin:8px 0 20px"><img src="../../../assets/img/id_text.png" alt="International Departures with Shane 54" style="display:block;width:100%;max-width:420px;height:auto"></h1><p class="bio">{e(CONTENT["id_bio"][lang])}</p>'
             f'<p class="bio" style="margin-top:24px;color:#bbb">{e(CONTENT["id_soon"][lang])}</p></section>' + foot())
     return page(lang, "music/id/", "International Departures — Shane 54", body, ACCENT["music"], up=3)
 

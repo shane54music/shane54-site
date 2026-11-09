@@ -12,7 +12,7 @@
     next: '<svg viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg>'
   };
   el.innerHTML =
-    '<div class="pl-top"><div class="pl-cover"><b>ID</b></div><div class="pl-meta"><small>' + LBL.now + '</small><h3 class="pl-title">—</h3><span class="pl-sub"></span></div></div>' +
+    '<img class="pl-logo" src="' + ROOT + 'assets/img/id_logo.png" alt="International Departures with Shane 54"><div class="pl-meta"><small>' + LBL.now + '</small><h3 class="pl-title">—</h3><span class="pl-sub"></span></div>' +
     '<input class="pl-bar" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek">' +
     '<div class="pl-times"><span class="pl-cur">0:00</span><span class="pl-dur">0:00</span></div>' +
     '<div class="pl-ctl"><button class="pl-spd" aria-label="Speed">1×</button><button class="pl-prev" aria-label="Previous">' + ICON.prev + '</button>' +
