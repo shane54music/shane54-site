@@ -264,10 +264,7 @@
     function apply() {
       var t = L[i]; sp.textContent = N[t];
       try { localStorage.setItem('s54theme', t); } catch (e) {}
-      var l = document.getElementById('themecss');
-      if (t === 'default') { if (l) l.remove(); return; }
-      if (!l) { l = document.createElement('link'); l.rel = 'stylesheet'; l.id = 'themecss'; document.head.appendChild(l); }
-      l.href = base + t + '.css';
+      if (t === 'default') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', t);
     }
     c.addEventListener('click', function (ev) { var d = ev.target.getAttribute && ev.target.getAttribute('data-d'); if (!d) return; i = (i + +d + L.length) % L.length; apply(); });
     document.body.appendChild(c); sp.textContent = N[L[i]];

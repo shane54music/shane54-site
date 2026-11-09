@@ -140,7 +140,23 @@ T["humble-mono"] = dict(imp=font("IBM+Plex+Mono:wght@400;500;600"), bg="#e9e9e6"
 if __name__ == "__main__":
     OUT.mkdir(parents=True, exist_ok=True)
     for f in OUT.glob("*.css"): f.unlink()
+    import re
+    imports, rules = [], []
     for name, v in T.items():
-        d = {**D, **v}
-        (OUT / f"{name}.css").write_text(BASE % d)
+        css = BASE % {**D, **v}
+        imports.append(re.search(r"@import url\('([^']*)'\);", css).group(0))
+        css = re.sub(r"@import url\('[^']*'\);\n", "", css)
+        pre = f'html[data-theme="{name}"]'
+        for block in css.split("}"):
+            if "{" not in block: continue
+            sel, decl = block.split("{", 1)
+            sels = []
+            for s in sel.split(","):
+                s = s.strip()
+                if not s: continue
+                if s == ":root": sels.append(pre)
+                elif s.startswith("body"): sels.append(pre + " " + s)
+                else: sels.append(pre + " " + s)
+            rules.append(",".join(sels) + "{" + decl.strip() + "}")
+    (OUT / "themes.css").write_text("\n".join(imports) + "\n" + "\n".join(rules) + "\n")
     print(len(T), "themes")

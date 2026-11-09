@@ -450,7 +450,8 @@ def page(lang, rel, title, body, accent="#ffc21a", up=0):
 {EPMETA}
 {HEAD}
 <link rel="stylesheet" href="{root}assets/style.css">
-<script>(function(){{try{{var q=location.search.match(/theme=([\w-]+)/),t=q?q[1]:localStorage.getItem('s54theme');if(q)localStorage.setItem('s54theme',t);if(t&&t!=='default'){{var l=document.createElement('link');l.rel='stylesheet';l.id='themecss';l.href='{root}assets/themes/'+t+'.css';document.head.appendChild(l)}}}}catch(e){{}}}})()</script>
+<link rel="stylesheet" href="{root}assets/themes/themes.css">
+<script>(function(){{try{{var q=location.search.match(/theme=([\w-]+)/),t=q?q[1]:localStorage.getItem('s54theme');if(q)localStorage.setItem('s54theme',t);if(t&&t!=='default')document.documentElement.setAttribute('data-theme',t)}}catch(e){{}}}})()</script>
 </head><body style="--ac:{accent}">
 <div id="app">{body.replace('@ROOT@', root).replace('@LANG@', lang).replace('@SW@', sw).replace('@CLUB@', club_block(lang)).replace('@CLUBBTN@', club_btn(lang))}</div>
 <div id="dock" hidden></div><div id="sheet" hidden></div>{club_sheet(lang)}
