@@ -466,7 +466,7 @@ def top(lang, active, subs, up):
 # Newsletter ("Join the club"). Fill CLUB["action"] with the form POST URL from the
 # mailing service (MailerLite / Buttondown / Mailchimp / Kit ...). While it is empty
 # the signup block is not rendered, so the live site never shows a dead form.
-CLUB = {"action": "", "field": "email", "hidden": {}}
+CLUB = {"action": "", "field": "fields[email]", "hidden": {"ml-submit": "1", "anticsrf": "true"}}  # MailerLite
 CLUB_T = {
     "title": {"hu": "JOIN THE CLUB", "en": "JOIN THE CLUB"},
     "text": {"hu": "Új zenék, videók, pluginek és koncertek: elsőként értesülsz róluk. Se spam, se felesleges levél.",
