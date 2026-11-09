@@ -86,7 +86,7 @@ html,body{margin:0;height:100%;background:#000;overflow:hidden;font-family:Inter
 var D=/*DATA*/null;
 var SEC={intro:'#ffd23f',art:'#ff9ec7',soft:'#35e0ff',music:'#7cff6b',anim:'#ffd23f',club:'#c9b6ff'};
 var I='../../assets/img/',lang='hu';
-try{lang=new URLSearchParams(location.search).get('lang')||localStorage.getItem('s54lang')||(/^hu/.test(navigator.language)?'hu':'en')}catch(e){}
+try{var ql=new URLSearchParams(location.search).get('lang');if(ql)localStorage.setItem('s54lang',ql);lang=ql||localStorage.getItem('s54lang')||(/^hu/.test(navigator.language)?'hu':'en')}catch(e){}
 if(lang!='en')lang='hu';
 var L,cards=[],cur=0,tm,held=false,sheets=0,T0=0,dur=0,rem=0,groups=[];
 function h(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}

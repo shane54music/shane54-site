@@ -473,7 +473,7 @@ def top(lang, active, subs, up):
     for i, (label, href) in enumerate(subs):
         subhtml += f'<a href="{href}"{" class=on" if i == 0 else ""}>{label}</a>'
     return f"""<div class="top"><header>
-<a class="logo" href="@ROOT@@LANG@/"><b>SHANE</b><i>54</i></a><span class="hr">@CLUBBTN@<a class="lang" href="@SW@">{'EN' if lang == 'hu' else 'HU'}</a></span></header>
+<a class="logo" href="@ROOT@?lang=@LANG@"><b>SHANE</b><i>54</i></a><span class="hr">@CLUBBTN@<a class="lang" href="@SW@">{'EN' if lang == 'hu' else 'HU'}</a></span></header>
 <nav class="strip">{tiles}</nav>
 <nav class="sub">{subhtml}</nav></div>"""
 
@@ -648,7 +648,7 @@ def build_player_preview():
     return page("hu", "", "Player preview", body, ACCENT["music"], up=1).replace("<head>", '<head><meta name="robots" content="noindex">', 1)
 
 
-def build_stories2():
+def build_stories2(root=False):
     """Data-driven Stories prototype: concepts/stories2/index.html from the template + the site's own data."""
     import json
     tpl = (SRC / "concepts" / "stories2" / "template.html").read_text("utf-8")
@@ -671,7 +671,12 @@ def build_stories2():
         disco.append({"name": head.split(" · ")[0].title().replace("Myon & Shane 54", "Myon & Shane 54"), "link": link, "groups": groups})
     D["disco"] = disco
     D["club"] = {"action": CLUB["action"], "field": CLUB["field"], "hidden": CLUB["hidden"], "t": CLUB_T}
-    return tpl.replace("/*DATA*/null", json.dumps(D, ensure_ascii=False))
+    out = tpl.replace("/*DATA*/null", json.dumps(D, ensure_ascii=False))
+    if root:
+        out = out.replace("../../", "")
+        out = out.replace("<title>Shane 54</title>", '<title>Shane 54</title><meta name="description" content="Shane 54: art, software, music, animation.">'
+                          '<meta property="og:title" content="Shane 54"><meta property="og:image" content="assets/img/dj.jpg"><link rel="icon" href="assets/img/favicon.png">', 1)
+    return out
 
 
 def main():
@@ -700,10 +705,7 @@ def main():
         shutil.copytree(SRC / "themes", OUT / "assets" / "themes")
     (OUT / "assets" / "style.css").write_text(CSS, "utf-8")
     (OUT / ".nojekyll").write_text("")
-    (OUT / "index.html").write_text(
-        '<!doctype html><meta charset="utf-8"><title>Shane 54</title><meta name="viewport" content="width=device-width,initial-scale=1">'
-        '<script>location.replace((navigator.language||"hu").slice(0,2)=="hu"?"hu/":"en/")</script>'
-        '<noscript><meta http-equiv="refresh" content="0;url=hu/"></noscript><a href="hu/">Shane 54</a>', "utf-8")
+    (OUT / "index.html").write_text(build_stories2(root=True), "utf-8")
     (OUT / "preview-player").mkdir()
     (OUT / "preview-player" / "index.html").write_text(build_player_preview(), "utf-8")
     for lang in LANGS:
