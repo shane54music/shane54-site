@@ -219,7 +219,7 @@ SOLO = [("2007", "1000 Lullabies", "", "Shah-Music Digital", "SINGLE"),
         ("2003", "Anomaly – Calling Your Name (Shane 54's Monster Mix)", "Libra presents Taylor", "Captivating Sounds", "REMIX"),
         ("2019", "Delirium", "Shane 54 feat. Clara Sofie", "Garuda", "SINGLE"),
         ("2012", "I Can Feel Your Love (Shane 54 Monster Mix)", "Quadraphonic", "Armada Digital", "REMIX"),
-        ("2007", "I Can (Shane 54 Laptop Remix)", "Tatana", "S2 Records", "REMIX"),
+        ("2007", "I Can (Shane 54 Laptop DJ Remix)", "Tatana", "S2 Records", "REMIX"),
         ("—", "Scirocco (Shane54 Remix)", "Scirocco", "Fenology Records", "REMIX")]
 
 DISCO = [("MYON & SHANE 54 · 2008–2015", "https://www.discogs.com/artist/1239503-Myon-Shane-54", MYON),
