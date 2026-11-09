@@ -246,6 +246,14 @@ html.sheet-open{overflow:hidden}
 /* music */
 .sp iframe{display:block;width:100%;height:352px;border:0;border-radius:14px}
 .disc{padding:8px 20px 0}
+.disc .dt{font-family:'Bowlby One',sans-serif;font-size:22px;color:#5ad1ff;padding:20px 0 0}
+.disc .dh{font-size:12px;font-weight:700;letter-spacing:.14em;color:#bbb;padding:22px 0 8px}
+.dg{border-top:1px solid #2a2a2a}
+.dg summary{list-style:none;display:flex;justify-content:space-between;align-items:center;min-height:48px;font-size:14px;font-weight:700;letter-spacing:.08em;cursor:pointer}
+.dg summary::-webkit-details-marker{display:none}
+.dg summary em{font-style:normal;font-size:12px;color:#5ad1ff;border:1px solid #5ad1ff;border-radius:999px;padding:2px 9px}
+.dg summary::after{content:"+";font-size:20px;color:#5ad1ff;margin-left:12px}
+.dg[open] summary::after{content:"–"}
 .disc .r{display:flex;gap:12px;align-items:center;padding:12px 0;border-top:1px solid #2a2a2a;min-height:56px}
 .disc .y{font-size:13px;color:#5ad1ff;font-weight:700;width:40px;flex:none}
 .disc .n{flex:1;min-width:0}
@@ -377,27 +385,46 @@ def build_plugins(lang):
     return page(lang, "software/", "Software — Shane 54", body, ACCENT["software"], up=2)
 
 
+def disco_cat(it):
+    y, t, c, l, k = it
+    if k in ("ALBUM", "COMP", "MIX", "DIGITAL"):
+        return "albums"
+    if "remix" in t.lower() or k == "PROMO" or (k == "EP" and "remix" in t.lower()):
+        return "remixes"
+    return "singles"
+
+
 def build_music(lang):
-    subs = [(T["bio"][lang], "#bio"), (T["disco"][lang], "#disco"), (T["id"][lang], "#id")]
+    subs = [(T["bio"][lang], "#bio"), (T["id"][lang], "#id"), (T["disco"][lang], "#disco")]
     rows = ""
+    CATN = {"singles": {"hu": "SINGLE-K", "en": "SINGLES"}, "remixes": {"hu": "REMIXEK", "en": "REMIXES"}, "albums": {"hu": "ALBUMOK", "en": "ALBUMS"}}
     for head, link, items in DISCO:
-        rows += f'<div style="font-size:12px;font-weight:700;letter-spacing:.14em;color:#bbb;padding:28px 0 8px">{head}</div>'
-        for y, t, c, l, k in items:
-            sub = " · ".join(x for x in (c, l) if x)
-            rows += f'<div class="r"><span class="y">{y}</span><span class="n"><b>{e(t)}</b><s>{e(sub)}</s></span><span class="tag">{k}</span></div>'
-        rows += f'<a class="btn" style="border:2px solid #5ad1ff;margin-top:12px" href="{link}">Discogs →</a>'
+        rows += f'<div class="dh">{head}</div>'
+        groups = {"singles": [], "remixes": [], "albums": []}
+        for it in items:
+            groups[disco_cat(it)].append(it)
+        for key in ("singles", "remixes", "albums"):
+            g = groups[key]
+            if not g:
+                continue
+            rows += f'<details class="dg"><summary><span>{CATN[key][lang]}</span><em>{len(g)}</em></summary>'
+            for y, t, c, l, k in g:
+                sub = " · ".join(x for x in (c, l) if x)
+                rows += f'<div class="r"><span class="y">{y}</span><span class="n"><b>{e(t)}</b><s>{e(sub)}</s></span><span class="tag">{k}</span></div>'
+            rows += '</details>'
+        rows += f'<a class="btn" style="border:2px solid #5ad1ff;margin:12px 0 8px" href="{link}">Discogs →</a>'
     body = (top(lang, "music", subs, 2) +
             '<section id="disco" class="pad sp" style="padding-top:20px">'
             f'<iframe src="https://open.spotify.com/embed/artist/{SPOTIFY}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify"></iframe></section>'
             f'<section id="bio" class="pad" style="padding-top:24px"><h1 class="t">MUSIC</h1>{"".join(f'<p class="bio">{e(t)}</p>' for t in CONTENT["music_bio"][lang])}</section>'
-            f'<div class="disc">{rows}</div>'
-            f'<section id="id" class="pad"><a class="idc" href="id/"><img src="../../assets/img/id_text.png" alt="International Departures with Shane 54" style="display:block;width:78%;height:auto"><span style="font-size:22px">→</span></a></section>'
+            f'<section id="id" class="pad" style="padding-top:8px;padding-bottom:8px"><a class="idc" href="id/"><img src="../../assets/img/id_text.png" alt="International Departures with Shane 54" style="display:block;width:78%;height:auto"><span style="font-size:22px">→</span></a></section>'
+            f'<div id="disco" class="disc"><div class="dt">{T["disco"][lang]}</div>{rows}</div>'
             + foot())
     return page(lang, "music/", "Music — Shane 54", body, ACCENT["music"], up=2)
 
 
 def build_id(lang):
-    subs = [(T["bio"][lang], "../#bio"), (T["disco"][lang], "../#disco"), (T["id"][lang], "#")]
+    subs = [(T["bio"][lang], "../#bio"), (T["id"][lang], "#"), (T["disco"][lang], "../#disco")]
     subs_html = top(lang, "music", subs, 3)
     subs_html = subs_html.replace('<a href="#">ID</a>', '<a href="#" class="on">ID</a>').replace('<a href="../#bio" class=on>', '<a href="../#bio">')
     body = (subs_html +
