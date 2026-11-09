@@ -52,8 +52,18 @@ CONTENT = {
         "hu": "Karakteres effektek és hangszerek, amiket elsősorban magamnak építek. A Space Cat Delay a Korg Monotron Delay önoszcilláló, zajos világából indult: nem tiszta delay, hanem hangulatgyár. A Berlin School és a Space Cat Reverb készülőben van.",
         "en": "Characterful effects and instruments, built first of all for myself. Space Cat Delay grew out of the self-oscillating, noisy world of the Korg Monotron Delay: not a clean delay but an atmosphere machine. Berlin School and Space Cat Reverb are on the way."},
     "music_bio": {
-        "hu": "Trance és progresszív: saját számok, mixek és élő szettek. A producer és a színpad ugyanaz az ember, rendezvényeket is szervezek.",
-        "en": "Trance and progressive: my own tracks, mixes and live sets. The producer and the stage are the same person, and I organise events too."},
+        "hu": [
+            "Shane 54 igazi sokoldalú ember.",
+            "A popénekesi múltja és a 90-es évek slágerei miatt, amiket a mai napig mindenhol játszanak, nyugodtan állíthatjuk, hogy ő Magyarország egyik legismertebb képzőművésze. (Oké, elsősorban a zenéjéről ismert, de azért az utcán a mai napig felismerik, ami a festők többségénél ritkább dolog.)",
+            "1973-ban született Budapesten. Még gimnazista volt, amikor popzenekarának első albuma megjelent, így húsz éves kora előtt már ismert közszereplő lett. A fiúegyüttes, amelynek frontembere volt, félmillió lemezt adott el, és néhány korai dala beépült a magyar popkultúrába.",
+            "A 90-es évek után elindult a DJ-karrierje, ami hihetetlen magasságokba repítette: ő az egyetlen magyar előadó, akinek RIAA aranylemeze van az Egyesült Államokban, és az egyetlen, aki valaha az első helyre került a Billboard Dance listán Magyarországról. A Myon & Shane 54 DJ/producer duó egyik feleként három éven át egymás után szerepelt a világ legjobb 100 DJ-je között a zeneipar bibliájának számító brit Mixmag listáján.",
+            "Zenei producerként és remixerként dolgozott többek között Lana Del Reyjel, Jessie J-vel, Tiëstóval, Armin van Buurennel, az Above & Beyonddal és még sok más előadóval."],
+        "en": [
+            "Shane 54 is truly a man of many trades.",
+            "Because of his pop singer background, and 90s mega hit singles getting played everywhere to this very day we can safely say he is one of the most well known fine artists of Hungary. (Ok, he’s known mainly for his musical output, but hey, people still recognise him on the street which is a less common feat with most painters)",
+            "Born in Budapest Hungary in 1973, he was still in high school when his pop band’s first album was released - he was a well known public figure before turning 20. The boyband he fronted sold half a million records, and some of those early songs cemented themselves into Hungarian pop culture.",
+            "After the 90s, he began his dj career, which took him to unbelievable heights: he’s the only Hungarian artist with an RIAA certified Gold Record in the USA, also he’s the only one to ever topped the Billboard Dance Charts from his native country. For 3 years in a row as one half dj/producer duo Myon & Shane 54 he was named in the Top 100 international djs of the world, by music industry bible Mixmag UK.",
+            "As a music producer / remixer he worked with the likes of Lana Del Rey, Jessie J, Tiesto, Armin Van Buuren, Above & Beyond and many many more."]},
     "anim_bio": {
         "hu": "Animátorként zenei videókat is készítek: ezek közül válogatás.",
         "en": "As an animator I also make music videos. A selection of them below."},
@@ -332,7 +342,7 @@ def build_music(lang):
     body = (top(lang, "music", subs, 2) +
             '<section id="disco" class="pad sp" style="padding-top:20px">'
             f'<iframe src="https://open.spotify.com/embed/artist/{SPOTIFY}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify"></iframe></section>'
-            f'<section id="bio" class="pad" style="padding-top:24px"><h1 class="t">MUSIC</h1><p class="bio">{e(CONTENT["music_bio"][lang])}</p></section>'
+            f'<section id="bio" class="pad" style="padding-top:24px"><h1 class="t">MUSIC</h1>{"".join(f'<p class="bio">{e(t)}</p>' for t in CONTENT["music_bio"][lang])}</section>'
             f'<div class="disc">{rows}</div>'
             f'<section id="id" class="pad"><a class="idc" href="id/"><b>INTERNATIONAL<br>DEPARTURES</b><span style="font-size:22px">→</span></a></section>'
             + foot())
