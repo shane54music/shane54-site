@@ -1,0 +1,51 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>INDEX · Shane 54</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--a:#c8ff00}
+html,body{margin:0;background:#f2f0ea;color:#0a0a0a;font-family:'Space Mono',monospace}
+.tick{position:sticky;top:0;z-index:30;background:var(--a);border-bottom:3px solid #0a0a0a;overflow:hidden;white-space:nowrap;font:700 12px/30px 'Space Mono';text-transform:uppercase}
+.tick div{display:inline-block;animation:m 28s linear infinite}@keyframes m{to{transform:translateX(-50%)}}
+header{display:flex;justify-content:space-between;align-items:flex-start;padding:14px 14px 0;font-size:12px;font-weight:700}
+.sticker{width:92px;height:92px;border-radius:50%;background:#0a0a0a;color:var(--a);display:flex;align-items:center;justify-content:center;text-align:center;font:700 11px/1.1 'Space Mono';transform:rotate(12deg);animation:sp 14s linear infinite;flex:none}@keyframes sp{to{transform:rotate(372deg)}}
+.hero{padding:6px 14px 28px;font:400 clamp(54px,19.5vw,150px)/.84 'Archivo Black';letter-spacing:-.05em;text-transform:uppercase}
+.hero span{background:var(--a);padding:0 6px}
+.lead{padding:0 14px 24px;max-width:36ch;font-size:13px;line-height:1.5}
+.row{border-top:3px solid #0a0a0a;position:relative;overflow:hidden;cursor:pointer}
+.row .h{display:flex;align-items:baseline;justify-content:space-between;padding:6px 14px 2px;font:400 clamp(54px,19vw,120px)/1 'Archivo Black';letter-spacing:-.04em;text-transform:uppercase;position:relative;z-index:2}
+.row .h small{font:700 12px 'Space Mono';letter-spacing:0;text-align:right;max-width:9ch;line-height:1.2}
+.row .bgi{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .25s;mix-blend-mode:multiply}
+.row:hover .bgi,.row.o .bgi{opacity:.55}
+.row.o{background:var(--a)}
+.pan{max-height:0;overflow:hidden;transition:max-height .5s}.row.o .pan{max-height:1400px}
+.pan>div{padding:8px 14px 22px;position:relative;z-index:2;font-size:13px;line-height:1.55}
+.hs{display:flex;gap:10px;overflow-x:auto;margin:6px -14px 12px;padding:0 14px;scroll-snap-type:x mandatory}.hs img{height:220px;width:auto;border:3px solid #0a0a0a;scroll-snap-align:start;flex:none}
+.tb{display:grid;grid-template-columns:48px 1fr auto;border-top:1px solid #0a0a0a;padding:8px 0;gap:8px}.tb b{font-weight:700}
+.lnk{display:inline-block;margin:10px 8px 0 0;background:#0a0a0a;color:var(--a);padding:12px 16px;font:700 13px 'Space Mono';text-decoration:none;border:3px solid #0a0a0a}
+.lnk.w{background:#fff;color:#0a0a0a}
+.sig{padding:30px 14px 14px;border-top:3px solid #0a0a0a;font:400 clamp(40px,14vw,90px)/.9 'Archivo Black';letter-spacing:-.04em;text-transform:uppercase;background:#0a0a0a;color:var(--a)}
+.sig input{display:block;width:100%;margin:18px 0 10px;border:3px solid var(--a);background:transparent;color:#fff;padding:14px;font:16px 'Space Mono'}
+.sig button{border:0;background:var(--a);color:#0a0a0a;padding:14px 20px;font:700 13px 'Space Mono'}
+.sig p{font:400 12px/1.5 'Space Mono';text-transform:none;letter-spacing:0;color:#fff;max-width:40ch}
+footer{background:#0a0a0a;color:#888;padding:10px 14px 24px;font-size:11px;display:flex;justify-content:space-between}
+</style></head><body>
+<div class="tick"><div id="tk"></div></div>
+<header><span>INDEX /<br>SHANE 54 · BUDAPEST</span><div class="sticker">HU<br>EN<br>★ 54 ★</div></header>
+<div class="hero">Zene.<br><span>Festés.</span><br>Kód.<br>Mozgókép.</div>
+<div class="lead">Egy ember, négy mappa. Nyisd ki, amelyik érdekel.</div>
+<div id="rows"></div>
+<div class="sig">Join the<br>club<p>Új zene, videók, pluginek és koncertek elsőként. Se spam, se felesleges levél.</p><input placeholder="e-mail címed"><button>FELIRATKOZOM →</button></div>
+<footer><span>© Shane 54</span><span>HU / EN</span></footer>
+<script>
+var I='../../assets/img/';
+var R=[
+{n:'Art',s:'110 festmény',i:'p05',b:'<div class="hs">'+['p03','p04','p05','p06','p07','p09','p10'].map(function(p){return '<img src="'+I+p+'.jpg">'}).join('')+'</div><a class="lnk" href="../../hu/art/">GALÉRIA →</a>'},
+{n:'Soft<br>ware',s:'Space Cat Delay',i:'delay_ui',b:'<img src="'+I+'delay_ui.jpg" style="width:100%;border:3px solid #0a0a0a"><p>Space Cat Delay · Berlin School · Reverb.</p><a class="lnk" href="../../hu/software/">LETÖLTÉS →</a>'},
+{n:'Music',s:'számok mixek podcast',i:'dj',b:'<p>1973, Budapest. A Myon & Shane 54 DJ/producer duó egyik fele; RIAA aranylemez, Billboard Dance első hely, háromszor a Mixmag Top 100-ban.</p>'+[['2024','Heist Film / Klondyke','Shane 54'],['2022','Kingdom','Shane 54'],['2017','Return To Love','Shane 54'],['2016','Round We Go','M&S54'],['2013','Strangers','M&S54']].map(function(r){return '<div class="tb"><b>'+r[0]+'</b><span>'+r[1]+'</span><span>'+r[2]+'</span></div>'}).join('')+'<a class="lnk" href="../../hu/music/id/">▶ PODCAST</a><a class="lnk w" href="../../hu/music/#disco">DISZKOGRÁFIA</a>'},
+{n:'Anima<br>tion',s:'zenei videók',i:'p08',b:'<p>Zenei videók, animátorként.</p><a class="lnk" href="../../hu/animation/">▶ VIDEÓK</a>'}];
+document.getElementById('rows').innerHTML=R.map(function(r,k){return '<div class="row" onclick="tg(this)"><div class="bgi" style="background-image:url('+I+r.i+'.jpg)"></div><div class="h"><span>'+r.n+'</span><small>'+r.s+'<br>+ / –</small></div><div class="pan"><div>'+r.b+'</div></div></div>'}).join('');
+function tg(e){var o=e.classList.contains('o');[].forEach.call(document.querySelectorAll('.row'),function(x){x.classList.remove('o')});if(!o){e.classList.add('o');setTimeout(function(){e.scrollIntoView({behavior:'smooth',block:'start'})},60)}}
+var t='ART ★ SOFTWARE ★ MUSIC ★ ANIMATION ★ JOIN THE CLUB ★ ';document.getElementById('tk').innerHTML=Array(8).join(t);
+</script></body></html>

@@ -1,0 +1,81 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>S54 OS · Shane 54</title>
+<link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden;font-family:'Space Mono',monospace;background:#1b1340;color:#1b1340}
+#desk{position:fixed;inset:0;background:
+ radial-gradient(circle at 20% 10%,#ff6ec7 0,transparent 40%),radial-gradient(circle at 90% 90%,#2de2e6 0,transparent 45%),#2b1a6b;overflow:hidden}
+#desk:before{content:"";position:absolute;inset:0;background:url(../../assets/img/p01.jpg) center/cover;opacity:.18;mix-blend-mode:luminosity}
+#desk:after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:32px 32px}
+#bar{position:fixed;top:0;left:0;right:0;height:30px;background:#fff;border-bottom:3px solid #1b1340;display:flex;align-items:center;padding:0 10px;gap:14px;font-size:12px;font-weight:700;z-index:50}
+#bar b{font-family:'Bowlby One';font-weight:400;font-size:15px}#bar i{margin-left:auto;font-style:normal}
+#icons{position:absolute;top:44px;left:12px;right:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:14px 6px;z-index:2;max-width:520px}
+.ic{display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:0;font:inherit;color:#fff;font-size:11px;font-weight:700;text-shadow:0 1px 0 #1b1340;cursor:pointer;padding:0}
+.ic span{width:64px;height:64px;border:3px solid #1b1340;border-radius:16px;background:#fff;box-shadow:4px 4px 0 #1b1340;display:flex;align-items:center;justify-content:center;font-size:30px;overflow:hidden}
+.ic span img{width:100%;height:100%;object-fit:cover}
+.ic:active span{transform:translate(3px,3px);box-shadow:1px 1px 0 #1b1340}
+.win{position:fixed;z-index:10;background:#fff;border:3px solid #1b1340;border-radius:14px;box-shadow:8px 8px 0 #1b1340;display:flex;flex-direction:column;overflow:hidden;min-width:280px}
+.win.hide{display:none}
+.tb{height:38px;flex:none;display:flex;align-items:center;gap:8px;padding:0 8px 0 12px;font-weight:700;font-size:13px;border-bottom:3px solid #1b1340;cursor:grab;touch-action:none;user-select:none}
+.tb .x{margin-left:auto;width:26px;height:26px;border:3px solid #1b1340;border-radius:50%;background:#ff5d73;font:700 14px/1 'Space Mono';color:#1b1340;cursor:pointer;padding:0}
+.tb .m{width:26px;height:26px;border:3px solid #1b1340;border-radius:50%;background:#ffd23f;padding:0;cursor:pointer}
+.body{overflow:auto;flex:1;-webkit-overflow-scrolling:touch;font-size:14px;line-height:1.5}
+.c0{background:#ff9ec7}.c1{background:#ffd23f}.c2{background:#6ee7ff}.c3{background:#b5f27c}.c4{background:#d6b8ff}
+.pad{padding:14px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:8px}
+.grid img{width:100%;aspect-ratio:1;object-fit:cover;border:3px solid #1b1340;border-radius:8px;cursor:zoom-in}
+.btn{display:inline-block;background:#1b1340;color:#fff;border:0;border-radius:999px;padding:12px 18px;font:700 13px 'Space Mono';cursor:pointer;text-decoration:none}
+.btn.y{background:#ffd23f;color:#1b1340;border:3px solid #1b1340}
+.prog{height:22px;border:3px solid #1b1340;border-radius:11px;overflow:hidden;background:#fff}.prog i{display:block;height:100%;width:0;background:repeating-linear-gradient(45deg,#1b1340 0 8px,#6ee7ff 8px 16px);transition:width 1.6s steps(12)}
+.file{display:flex;gap:10px;align-items:center;padding:9px 14px;border-bottom:2px dashed #1b134033;cursor:default}
+.file b{width:42px;flex:none;color:#d63384}.file small{margin-left:auto;opacity:.6}
+.tabs{display:flex;border-bottom:3px solid #1b1340}.tabs button{flex:1;padding:10px 4px;background:#fff;border:0;border-right:3px solid #1b1340;font:700 12px 'Space Mono';cursor:pointer}.tabs button:last-child{border-right:0}.tabs button.on{background:#1b1340;color:#fff}
+.ep{display:flex;gap:10px;align-items:center;padding:10px 14px;border-bottom:2px dashed #1b134033}.ep button{width:36px;height:36px;border-radius:50%;border:3px solid #1b1340;background:#6ee7ff;cursor:pointer;flex:none}
+.big{font-family:'Bowlby One';font-size:30px;line-height:1;margin:0 0 8px}
+#task{position:fixed;left:0;right:0;bottom:0;height:46px;background:#fff;border-top:3px solid #1b1340;display:flex;gap:6px;align-items:center;padding:0 8px;z-index:50;overflow-x:auto}
+#task button{flex:none;height:32px;padding:0 12px;border:3px solid #1b1340;border-radius:8px;background:#ffd23f;font:700 11px 'Space Mono';cursor:pointer}
+#lb{position:fixed;inset:0;background:rgba(27,19,64,.92);z-index:90;display:none;align-items:center;justify-content:center;padding:16px}#lb img{max-width:100%;max-height:100%;border:4px solid #fff}
+@media(max-width:700px){.win{left:0!important;top:30px!important;right:0;bottom:46px;width:auto!important;height:auto!important;border-radius:0;border-width:0 0 3px;box-shadow:none}.tb{cursor:default}}
+</style></head><body>
+<div id="desk"></div>
+<div id="bar"><b>S54 OS</b><span>File</span><span>Edit</span><span>View</span><i id="clk"></i></div>
+<div id="icons"></div>
+<div id="task"></div>
+<div id="lb" onclick="this.style.display='none'"><img alt=""></div>
+<script>
+var P=['p01','p02','p03','p04','p05','p06','p07','p08','p09','p10'];
+var APPS={
+art:{t:'ART.exe',i:'<img src="../../assets/img/p03.jpg">',c:'c0',n:'ART',w:380,h:480,x:40,y:60,b:function(){return '<div class="grid">'+P.map(function(p){return '<img src="../../assets/img/'+p+'.jpg" onclick="zoom(this.src)">'}).join('')+'</div><div class="pad">110 festmény.<br><br><a class="btn" href="../../hu/art/">Teljes galéria →</a></div>'}},
+software:{t:'INSTALL_SPACECAT.exe',i:'🎛️',c:'c2',n:'SOFTWARE',w:420,h:440,x:120,y:90,b:function(){return '<img src="../../assets/img/delay_ui.jpg" style="width:100%;display:block;border-bottom:3px solid #1b1340"><div class="pad"><p class="big">Space Cat Delay</p><p>Delay · Berlin School · Reverb</p><div class="prog"><i id="pg"></i></div><br><button class="btn y" onclick="inst()">Telepítés</button> <a class="btn" href="../../hu/software/">Részletek →</a></div>'}},
+music:{t:'MUSIC/',i:'💿',c:'c3',n:'MUSIC',w:440,h:500,x:200,y:50,b:function(){return '<div class="tabs"><button class="on" onclick="mt(0,this)">BIO</button><button onclick="mt(1,this)">DISCO</button><button onclick="mt(2,this)">PODCAST</button></div><div id="mt"></div>'}},
+anim:{t:'ANIMATION.mov',i:'<img src="../../assets/img/p08.jpg">',c:'c1',n:'ANIMATION',w:400,h:360,x:90,y:120,b:function(){return '<div style="position:relative"><img src="../../assets/img/p08.jpg" style="width:100%;display:block"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><span style="width:70px;height:70px;border-radius:50%;background:#fff;border:4px solid #1b1340;display:flex;align-items:center;justify-content:center;font-size:26px;padding-left:5px">▶</span></div></div><div class="pad">Zenei videók, animátorként.<br><br><a class="btn" href="../../hu/animation/">Összes videó →</a></div>'}},
+club:{t:'MAIL.app',i:'✉️',c:'c4',n:'JOIN THE CLUB',w:380,h:330,x:60,y:150,b:function(){return '<div class="pad"><p class="big">JOIN<br>THE CLUB</p><p>Új zene, videók, pluginek és koncertek elsőként.</p><input placeholder="e-mail" style="width:100%;padding:12px;border:3px solid #1b1340;font:16px \'Space Mono\';margin-bottom:10px"><br><button class="btn y">Feliratkozom</button></div>'}}
+};
+var DISC=[['2024','Heist Film / Klondyke','UV Noir'],['2022','Kingdom','Shane 54 feat. London Thor'],['2016','Round We Go','Ride Recordings'],['2013','Strangers','Seven Lions w/ Myon & Shane 54 · Casablanca'],['2013','Outshine','Myon & Shane 54'],['2008','International Departures','Myon & Shane 54']];
+var EPS=[['756','International Departures'],['755','International Departures'],['754','International Departures'],['753','International Departures']];
+function mt(i,b){if(b){[].forEach.call(b.parentNode.children,function(x){x.className=''});b.className='on'}var m=document.getElementById('mt');
+ m.innerHTML=i==0?'<div class="pad"><p class="big">Shane 54</p>1973-ban született Budapesten. Még gimnazista volt, amikor popzenekarának első albuma megjelent. A fiúegyüttes, amelynek frontembere volt, félmillió lemezt adott el. Később ő az egyetlen magyar előadó, akinek RIAA aranylemeze van az Egyesült Államokban.<br><br><div class="ep" style="padding:0;border:0"><img src="../../assets/img/dj.jpg" style="width:100%;border:3px solid #1b1340;border-radius:8px"></div></div>':
+ i==1?DISC.map(function(d){return '<div class="file"><b>'+d[0]+'</b>'+d[1]+'<small>'+d[2]+'</small></div>'}).join('')+'<div class="pad"><a class="btn" href="../../hu/music/#disco">Teljes diszkográfia →</a></div>':
+ EPS.map(function(e){return '<div class="ep"><button>▶</button><div><b>#'+e[0]+'</b><br>'+e[1]+'</div></div>'}).join('')+'<div class="pad"><a class="btn" href="../../hu/music/id/">Mind a 764 epizód →</a></div>'}
+function inst(){var p=document.getElementById('pg');p.style.width='100%';setTimeout(function(){alert&&0;document.getElementById('pg').parentNode.insertAdjacentHTML('afterend','<p><b>✔ Kész.</b> (demo)</p>')},1700)}
+function zoom(s){var l=document.getElementById('lb');l.firstElementChild.src=s;l.style.display='flex'}
+var z=10,open={};
+function mk(k){var a=APPS[k];if(open[k]){show(k);return}
+ var w=document.createElement('div');w.className='win';w.style.cssText='left:'+a.x+'px;top:'+(a.y+30)+'px;width:'+a.w+'px;height:'+a.h+'px';
+ w.innerHTML='<div class="tb '+a.c+'"><span>'+a.t+'</span><button class="m" title="min"></button><button class="x">×</button></div><div class="body">'+a.b()+'</div>';
+ document.body.appendChild(w);open[k]=w;
+ w.querySelector('.x').onclick=function(){w.remove();delete open[k];tk()};
+ w.querySelector('.m').onclick=function(){w.classList.add('hide');tk()};
+ w.addEventListener('pointerdown',function(){front(w)});
+ var tb=w.querySelector('.tb'),dx,dy,dr=0;tb.onpointerdown=function(e){if(innerWidth<=700||e.target.tagName=='BUTTON')return;dr=1;dx=e.clientX-w.offsetLeft;dy=e.clientY-w.offsetTop;tb.setPointerCapture(e.pointerId)};
+ tb.onpointermove=function(e){if(dr){w.style.left=e.clientX-dx+'px';w.style.top=Math.max(30,e.clientY-dy)+'px'}};tb.onpointerup=function(){dr=0};
+ if(k=='music')mt(0);front(w);tk()}
+function front(w){w.style.zIndex=++z;if(innerWidth<=700)for(var k in open)if(open[k]!==w)open[k].classList.add('hide');w.classList.remove('hide');tk()}
+function show(k){open[k].classList.remove('hide');front(open[k])}
+function tk(){document.getElementById('task').innerHTML=Object.keys(open).map(function(k){return '<button style="'+(open[k].classList.contains('hide')?'background:#fff':'')+'" onclick="show(\''+k+'\')">'+APPS[k].n+'</button>'}).join('')||'<span style="font-size:11px;opacity:.6">Koppints egy ikonra →</span>'}
+document.getElementById('icons').innerHTML=Object.keys(APPS).map(function(k){return '<button class="ic" onclick="mk(\''+k+'\')"><span class="'+APPS[k].c+'">'+APPS[k].i+'</span>'+APPS[k].n+'</button>'}).join('');
+setInterval(function(){var d=new Date();document.getElementById('clk').textContent=d.toTimeString().slice(0,5)},1000);tk();
+if(innerWidth>700){mk('art');mk('music')}
+</script></body></html>

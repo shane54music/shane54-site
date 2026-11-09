@@ -1,0 +1,84 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Wall · Shane 54</title>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Caveat:wght@600&family=Bowlby+One&family=Inter:wght@500;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden;background:#17120e;font-family:Inter,sans-serif;overscroll-behavior:none}
+#view{position:fixed;inset:0;touch-action:none;cursor:grab;overflow:hidden}
+#world{position:absolute;left:0;top:0;width:3200px;height:2400px;transform-origin:0 0;will-change:transform;
+ background:radial-gradient(ellipse at 20% 15%,#3a2f26,#17120e 70%);
+ background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 2px,transparent 2px 60px),repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 2px,transparent 2px 120px)}
+.it{position:absolute;box-shadow:0 14px 30px -8px #000a;transition:transform .25s}
+.it:hover{transform:scale(1.04) rotate(0)!important;z-index:5}
+.pol{background:#f6f2e8;padding:12px 12px 44px;cursor:zoom-in}
+.pol img{display:block;width:100%;height:100%;object-fit:cover}
+.pol span{position:absolute;left:0;right:0;bottom:10px;text-align:center;font:600 22px Caveat;color:#222}
+.tape{position:absolute;left:50%;top:-14px;width:90px;height:28px;margin-left:-45px;background:rgba(255,230,120,.7);transform:rotate(-3deg)}
+.big{position:absolute;font-family:'Bowlby One';font-size:210px;line-height:.9;letter-spacing:-.02em;color:transparent;-webkit-text-stroke:3px #ffffff55;white-space:nowrap;pointer-events:none}
+.note{padding:18px;font:400 15px/1.5 Inter;color:#222;background:#ffe14a;box-shadow:0 14px 30px -8px #000a}
+.note b{font:400 26px 'Permanent Marker';display:block;margin-bottom:6px}
+.cardw{background:#111;border:6px solid #1c2333;border-radius:20px;overflow:hidden}
+.cardw img{display:block;width:100%}
+.sleeve{background:#fff;color:#111;padding:14px;display:flex;flex-direction:column;justify-content:flex-end;font:800 20px/1.1 Inter;border:2px solid #111}
+.sleeve small{font:500 11px Inter;margin-top:6px;opacity:.7}
+.btnw{position:absolute;display:inline-block;background:#fff;color:#111;font:800 15px Inter;padding:14px 22px;border-radius:999px;text-decoration:none;box-shadow:0 6px 0 #0006}
+#nav{position:fixed;left:0;right:0;bottom:0;display:flex;gap:6px;padding:10px 10px calc(10px + env(safe-area-inset-bottom));z-index:20;justify-content:center}
+#nav button{flex:1;max-width:120px;min-height:48px;border:0;border-radius:14px;font:800 12px Inter;letter-spacing:.06em;color:#111;cursor:pointer;box-shadow:0 6px 0 #0006}
+#hud{position:fixed;left:12px;top:12px;z-index:20;color:#fff;font:400 22px 'Bowlby One';mix-blend-mode:difference}
+#hint{position:fixed;top:12px;right:12px;z-index:20;color:#fff;font:600 13px Inter;opacity:.7;text-align:right}
+#map{position:fixed;right:10px;top:44px;width:96px;height:72px;background:#0008;border:1px solid #fff4;z-index:20}#map i{position:absolute;border:1.5px solid #ffe14a}
+#lb{position:fixed;inset:0;background:#000d;z-index:40;display:none;align-items:center;justify-content:center;padding:20px}#lb img{max-width:100%;max-height:100%;border:10px solid #f6f2e8}
+.spot{position:fixed;inset:0;pointer-events:none;z-index:10;background:radial-gradient(circle at var(--x,50%) var(--y,50%),transparent 160px,rgba(0,0,0,.55) 520px)}
+</style></head><body>
+<div id="view"><div id="world"></div></div>
+<div class="spot" id="spot"></div>
+<div id="hud">SHANE 54</div><div id="hint">húzd az egész falat ✋<br>↔ ↕</div><div id="map"></div>
+<div id="nav"></div>
+<div id="lb" onclick="this.style.display='none'"><img alt=""></div>
+<script>
+var I='../../assets/img/';
+var Z={art:{n:'ART',c:'#ff9ec7',x:0,y:0},soft:{n:'SOFTWARE',c:'#6ee7ff',x:1700,y:0},music:{n:'MUSIC',c:'#b5f27c',x:0,y:1200},anim:{n:'ANIMATION',c:'#ffd23f',x:1700,y:1200}};
+var items=[];
+function pol(z,img,x,y,w,h,r,cap){items.push('<div class="it pol" style="left:'+(z.x+x)+'px;top:'+(z.y+y)+'px;width:'+w+'px;height:'+h+'px;transform:rotate('+r+'deg)" onclick="zoom(\''+I+img+'.jpg\')"><i class="tape"></i><img src="'+I+img+'.jpg"><span>'+cap+'</span></div>')}
+function big(z,t,x,y){items.push('<div class="big" style="left:'+(z.x+x)+'px;top:'+(z.y+y)+'px">'+t+'</div>')}
+function note(z,html,x,y,w,r){items.push('<div class="it note" style="left:'+(z.x+x)+'px;top:'+(z.y+y)+'px;width:'+w+'px;transform:rotate('+r+'deg)">'+html+'</div>')}
+// ART
+var a=Z.art;big(a,'ART',40,30);
+pol(a,'p03',60,330,330,430,-4,'№ 03');pol(a,'p04',430,280,400,420,3,'№ 04');pol(a,'p05',860,330,420,370,-2,'№ 05');pol(a,'p01',80,800,330,470,3,'№ 01');
+pol(a,'p07',480,760,470,400,-3,'№ 07');pol(a,'p09',990,740,440,350,2,'№ 09');pol(a,'p10',1000,1100,380,300,-4,'№ 10');
+note(a,'<b>110 festmény</b>Ez itt csak egy része. A többi a galériában.<br><br><a href="../../hu/art/" style="color:#111;font-weight:800">Teljes galéria →</a>',1380,380,230,5);
+// SOFTWARE
+var s=Z.soft;big(s,'SOFT-<br>WARE',40,30);
+items.push('<div class="it cardw" style="left:'+(s.x+120)+'px;top:'+(s.y+500)+'px;width:820px;transform:rotate(-2deg)"><img src="'+I+'delay_ui.jpg"></div>');
+note(s,'<b>Space Cat Delay</b>Delay · Berlin School · Reverb<br><br><a href="../../hu/software/" style="color:#111;font-weight:800">Letöltés →</a>',1000,560,260,4);
+items.push('<a class="btnw" style="left:'+(s.x+190)+'px;top:'+(s.y+940)+'px;background:#6ee7ff" href="../../hu/software/">LETÖLTÉS ↓</a>');
+// MUSIC
+var m=Z.music;big(m,'MUSIC',40,30);
+pol(m,'dj',60,330,520,380,-3,'Live');
+note(m,'<b>Shane 54</b>1973, Budapest. RIAA aranylemez, Billboard Dance #1, Mixmag Top 100 – Myon & Shane 54.',640,360,300,3);
+[['Kingdom','2022','#ff9ec7'],['Strangers','2013','#6ee7ff'],['Outshine','2013','#ffd23f'],['Round We Go','2016','#b5f27c'],['Return To Love','2017','#d6b8ff'],['Heist Film','2024','#fff']].forEach(function(r,i){
+ items.push('<div class="it sleeve" style="left:'+(m.x+60+(i%3)*300)+'px;top:'+(m.y+800+Math.floor(i/3)*300)+'px;width:270px;height:270px;background:'+r[2]+';transform:rotate('+((i*7%9)-4)+'deg)">'+r[0]+'<small>'+r[1]+'</small></div>')});
+items.push('<a class="it btnw" style="left:'+(m.x+1000)+'px;top:'+(m.y+420)+'px;background:#b5f27c" href="../../hu/music/id/">▶ International Departures · 764 epizód</a>');
+items.push('<a class="btnw" style="left:'+(m.x+1000)+'px;top:'+(m.y+530)+'px" href="../../hu/music/#disco">Diszkográfia →</a>');
+// ANIM
+var n=Z.anim;big(n,'ANI-<br>MATION',40,30);
+pol(n,'p08',100,500,560,400,-3,'№ 08');pol(n,'p06',760,430,420,320,2,'№ 06');
+items.push('<div class="it" style="left:'+(n.x+740)+'px;top:'+(n.y+820)+'px;width:500px;height:280px;background:#000 url('+I+'p02.jpg) center/cover;border:8px solid #fff;display:flex;align-items:center;justify-content:center;transform:rotate(2deg)"><a href="../../hu/animation/" style="width:88px;height:88px;border-radius:50%;background:#fff;color:#111;font-size:34px;display:flex;align-items:center;justify-content:center;text-decoration:none;padding-left:6px">▶</a></div>');
+note(n,'<b>Videók</b>Zenei videók, animátorként.',1260,500,230,-4);
+// join
+items.push('<div class="it note" style="left:1480px;top:1080px;width:360px;background:#fff;transform:rotate(-2deg)"><b>JOIN THE CLUB</b>Új zene, videók, pluginek, koncertek elsőként.<br><br><input placeholder="e-mail" style="width:100%;padding:12px;font:16px Inter;border:3px solid #111"><br><br><a class="btnw" style="position:static;background:#111;color:#fff">Feliratkozom</a></div>');
+var W=document.getElementById('world');W.innerHTML=items.join('');
+var V=document.getElementById('view'),sc=innerWidth<700?.42:.8,tx=0,ty=0;
+function clamp(){var vw=innerWidth,vh=innerHeight;tx=Math.min(0,Math.max(vw-3200*sc,tx));ty=Math.min(0,Math.max(vh-2400*sc,ty))}
+function draw(){clamp();W.style.transform='translate('+tx+'px,'+ty+'px) scale('+sc+')';var m=document.getElementById('map');m.innerHTML='<i style="left:'+(-tx/sc/3200*96)+'px;top:'+(-ty/sc/2400*72)+'px;width:'+(innerWidth/sc/3200*96)+'px;height:'+(innerHeight/sc/2400*72)+'px"></i>'}
+var d=0,lx,ly,vx=0,vy=0;
+V.addEventListener('pointerdown',function(e){d=1;lx=e.clientX;ly=e.clientY;vx=vy=0});
+addEventListener('pointermove',function(e){document.getElementById('spot').style.setProperty('--x',e.clientX+'px');document.getElementById('spot').style.setProperty('--y',e.clientY+'px');if(!d)return;vx=e.clientX-lx;vy=e.clientY-ly;tx+=vx;ty+=vy;lx=e.clientX;ly=e.clientY;draw()});
+addEventListener('pointerup',function(){d=0;(function f(){if(d||Math.abs(vx)+Math.abs(vy)<.5)return;vx*=.94;vy*=.94;tx+=vx;ty+=vy;draw();requestAnimationFrame(f)})()});
+V.addEventListener('wheel',function(e){tx-=e.deltaX;ty-=e.deltaY;draw();e.preventDefault()},{passive:false});
+function go(k){var z=Z[k],t0=performance.now(),x0=tx,y0=ty,x1=-z.x*sc+16,y1=-z.y*sc+10;(function f(t){var p=Math.min(1,(t-t0)/700);p=1-Math.pow(1-p,3);tx=x0+(x1-x0)*p;ty=y0+(y1-y0)*p;draw();if(p<1)requestAnimationFrame(f)})(t0)}
+function zoom(s){if(Math.abs(vx)+Math.abs(vy)>3)return;var l=document.getElementById('lb');l.firstElementChild.src=s;l.style.display='flex'}
+document.getElementById('nav').innerHTML=Object.keys(Z).map(function(k){return '<button style="background:'+Z[k].c+'" onclick="go(\''+k+'\')">'+Z[k].n+'</button>'}).join('');
+addEventListener('resize',draw);draw();
+</script></body></html>

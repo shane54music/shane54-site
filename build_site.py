@@ -666,6 +666,8 @@ def main():
     if (SRC / "ep").exists():
         shutil.copytree(SRC / "ep", OUT / "assets" / "ep")
     shutil.copy(SRC / "site.js", OUT / "assets" / "site.js")
+    if (SRC / "concepts").exists():
+        shutil.copytree(SRC / "concepts", OUT / "concepts")
     if (SRC / "themes").exists():
         shutil.copytree(SRC / "themes", OUT / "assets" / "themes")
     (OUT / "assets" / "style.css").write_text(CSS, "utf-8")

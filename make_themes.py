@@ -137,6 +137,9 @@ T["humble-mono"] = dict(imp=font("IBM+Plex+Mono:wght@400;500;600"), bg="#e9e9e6"
  pgap="1px", go="0", r14="0", r16="0", r20="0", pill="0", dockbg="#f2f2ef", onhl="#fff", epon="#e0e0da", playbg="rgba(255,255,255,.9)", clubbg="#1c1c1c", clubfg="#e9e9e6", ls="0", onc="#fff", rowbg="#f2f2ef",
  extra=".logo b{font-size:17px}.logo i{font-size:17px;padding:0;font-family:'IBM Plex Mono';font-weight:600}.logo i:before{content:'/'}.sub a{border:1px solid #c9c9c3;font-weight:500;font-size:12px;text-transform:lowercase}.sub a.on{background:#1c1c1c;color:#e9e9e6;border-color:#1c1c1c}.strip a{border:1px solid #c9c9c3}.strip span{font-weight:500;text-transform:lowercase}.panel .go{background:#e9e9e6!important;width:34px;height:34px;font-size:16px}.panel small{font-weight:400;letter-spacing:0}.plug{border:1px solid #c9c9c3}.rowc,.idc{border-width:1px}.club h2{font-size:24px;letter-spacing:-.02em}.club input[type=email]{border:1px solid #1c1c1c;background:#e9e9e6;color:#1c1c1c}.club button{background:#e9e9e6;color:#1c1c1c}.disc .dt{font-size:16px;color:#1c1c1c}.vid .pl:after{border-left-color:#1c1c1c}.dg summary em,.tag{border:1px solid #c2410c}.btn{border:1px solid #1c1c1c}.exh .d,.disc .y{color:#c2410c}.gal img{border:1px solid #c9c9c3}")
 
+KEEP = ["flashy-pop"]
+T = {k: v for k, v in T.items() if k in KEEP}
+
 if __name__ == "__main__":
     OUT.mkdir(parents=True, exist_ok=True)
     for f in OUT.glob("*.css"): f.unlink()

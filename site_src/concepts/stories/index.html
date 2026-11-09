@@ -1,0 +1,62 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Stories · Shane 54</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@500;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:#000;overflow:hidden;font-family:Inter,sans-serif;color:#fff}
+#stage{position:fixed;inset:0;max-width:480px;margin:0 auto;overflow:hidden;background:#000}
+.card{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .35s,transform .35s;transform:scale(1.04);overflow:hidden}
+.card.on{opacity:1;pointer-events:auto;transform:none}
+.card>img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),rgba(0,0,0,0) 55%,rgba(0,0,0,.45));pointer-events:none}
+.card.on>img.bg{animation:kb 9s ease-out forwards}@keyframes kb{from{transform:scale(1)}to{transform:scale(1.12)}}
+.tx{position:absolute;left:20px;right:20px;bottom:calc(70px + env(safe-area-inset-bottom));z-index:3}
+.tx small{display:block;font:800 12px Inter;letter-spacing:.2em;margin-bottom:6px;color:var(--c)}
+.tx h1{margin:0;font:400 clamp(64px,22vw,110px)/.9 Anton;text-transform:uppercase;letter-spacing:.01em}
+.tx p{margin:10px 0 0;font:500 16px/1.4 Inter;max-width:30ch;text-shadow:0 1px 8px #000}
+.tx a,.tx button{display:inline-flex;align-items:center;min-height:50px;margin-top:14px;padding:0 24px;border-radius:999px;background:#fff;color:#000;font:800 14px Inter;border:0;text-decoration:none;position:relative;z-index:5}
+.flat{display:flex;align-items:flex-end}.flat:after{display:none}
+#prog{position:absolute;top:calc(8px + env(safe-area-inset-top));left:10px;right:10px;display:flex;gap:3px;z-index:20}
+#prog i{flex:1;height:3px;background:#fff4;border-radius:2px;overflow:hidden}#prog i b{display:block;height:100%;width:0;background:#fff}
+#chips{position:absolute;top:calc(22px + env(safe-area-inset-top));left:10px;right:10px;display:flex;gap:6px;z-index:20;overflow-x:auto;scrollbar-width:none}
+#chips button{flex:none;border:0;border-radius:999px;padding:0 14px;min-height:36px;font:800 11px Inter;letter-spacing:.08em;background:#0007;color:#fff;backdrop-filter:blur(8px);cursor:pointer}
+#chips button.on{background:#fff;color:#000}
+.zl,.zr{position:absolute;top:100px;bottom:140px;width:34%;z-index:4}.zl{left:0}.zr{right:0}
+.stack{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.stack img{position:absolute;width:56%;border:6px solid #fff;box-shadow:0 20px 40px #0008}
+.stack img:nth-child(1){transform:rotate(-8deg) translate(-26%,-8%)}.stack img:nth-child(2){transform:rotate(5deg) translate(24%,-20%);}.stack img:nth-child(3){transform:rotate(-2deg) translate(0,26%);width:60%}
+.club input{width:100%;min-height:54px;border:0;border-radius:14px;padding:0 16px;font:16px Inter;margin-top:12px;position:relative;z-index:5}
+</style></head><body>
+<div id="stage"></div>
+<script>
+var I='../../assets/img/';
+var S=[
+{g:'intro',c:'#ffd23f',img:'p01',k:'SHANE 54',h:'HELLÓ',p:'Zenész. Festő. Szoftverfejlesztő. Koppints a folytatáshoz →'},
+{g:'ART',c:'#ff9ec7',img:'p03',k:'01 · ART',h:'Art',p:'110 festmény.'},
+{g:'ART',c:'#ff9ec7',img:'p07',k:'01 · ART',h:'Nagyon<br>közelről',p:'Macskák, színek, vászon.'},
+{g:'ART',c:'#ff9ec7',img:'p05',k:'01 · ART',h:'Galéria',p:'Mind a 110 festmény.',a:['../../hu/art/','Megnézem →']},
+{g:'SOFT',c:'#35e0ff',img:'delay_ui',k:'02 · SOFTWARE',h:'Space<br>Cat Delay',p:'Delay · Berlin School · Reverb',contain:1},
+{g:'SOFT',c:'#35e0ff',img:'delay_ui',k:'02 · SOFTWARE',h:'Hallgasd<br>meg',p:'Saját plugin, saját hang.',a:['../../hu/software/','Letöltés →'],contain:1},
+{g:'MUSIC',c:'#7cff6b',img:'dj',k:'03 · MUSIC',h:'Music',p:'RIAA aranylemez. Billboard Dance #1.'},
+{g:'MUSIC',c:'#7cff6b',img:'p04',k:'03 · MUSIC · PODCAST',h:'Inter-<br>national<br>Departures',p:'764 epizód.',a:['../../hu/music/id/','▶ Lejátszás']},
+{g:'MUSIC',c:'#7cff6b',img:'p09',k:'03 · MUSIC · DISCO',h:'Disco-<br>gráfia',p:'Shane 54 · Myon & Shane 54',a:['../../hu/music/#disco','Összes megjelenés →']},
+{g:'ANIM',c:'#ffd23f',img:'p08',k:'04 · ANIMATION',h:'Videók',p:'Zenei videók, animátorként.',a:['../../hu/animation/','▶ Nézd meg']},
+{g:'CLUB',c:'#c9b6ff',img:'p02',k:'JOIN THE CLUB',h:'Maradj<br>velünk',p:'Új zene, videók, pluginek és koncertek elsőként.',club:1}];
+var G=['intro','ART','SOFT','MUSIC','ANIM','CLUB'],GN={intro:'KEZDŐLAP',ART:'ART',SOFT:'SOFTWARE',MUSIC:'MUSIC',ANIM:'ANIMATION',CLUB:'JOIN'};
+var st=document.getElementById('stage'),cur=0,tm,T=7000;
+st.innerHTML=S.map(function(s){return '<div class="card" style="--c:'+s.c+';background:#111"><img class="bg" src="'+I+s.img+'.jpg" '+(s.contain?'style="object-fit:contain;background:#0d1020;padding:0 0 30%"':'')+'><div class="tx"><small>'+s.k+'</small><h1>'+s.h+'</h1><p>'+s.p+'</p>'+(s.a?'<a href="'+s.a[0]+'">'+s.a[1]+'</a>':'')+(s.club?'<div class="club"><input placeholder="e-mail címed"><br><button>Feliratkozom</button></div>':'')+'</div></div>'}).join('')
+ +'<div class="zl" id="zl"></div><div class="zr" id="zr"></div><div id="prog"></div><div id="chips"></div>';
+var cards=st.querySelectorAll('.card'),prog=document.getElementById('prog');
+prog.innerHTML=S.map(function(){return '<i><b></b></i>'}).join('');
+document.getElementById('chips').innerHTML=G.map(function(g){return '<button data-g="'+g+'">'+GN[g]+'</button>'}).join('');
+function go(i){i=Math.max(0,Math.min(S.length-1,i));cur=i;[].forEach.call(cards,function(c,j){c.classList.toggle('on',j==i)});
+ [].forEach.call(prog.children,function(p,j){var b=p.firstChild;b.style.transition='none';b.style.width=j<i?'100%':'0';if(j==i){void b.offsetWidth;b.style.transition='width '+T+'ms linear';b.style.width='100%'}});
+ [].forEach.call(document.querySelectorAll('#chips button'),function(b){b.className=b.dataset.g==S[i].g?'on':''});
+ clearTimeout(tm);tm=setTimeout(function(){if(cur<S.length-1)go(cur+1)},S[i].club?9e9:T)}
+document.getElementById('zr').onclick=function(){go(cur+1)};document.getElementById('zl').onclick=function(){go(cur-1)};
+document.getElementById('chips').onclick=function(e){var g=e.target.dataset&&e.target.dataset.g;if(g)go(S.findIndex(function(s){return s.g==g}))};
+var y0;st.addEventListener('touchstart',function(e){y0=e.touches[0].clientY});st.addEventListener('touchend',function(e){var d=e.changedTouches[0].clientY-y0;if(d<-60)go(cur+1);if(d>60)go(cur-1)});
+addEventListener('keydown',function(e){if(e.key=='ArrowRight'||e.key=='ArrowDown')go(cur+1);if(e.key=='ArrowLeft'||e.key=='ArrowUp')go(cur-1)});
+go(0);
+</script></body></html>
