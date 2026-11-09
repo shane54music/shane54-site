@@ -285,6 +285,15 @@ h1.t{margin:0 0 16px;font-family:'Bowlby One',sans-serif;font-weight:400;font-si
 section{scroll-margin-top:200px}
 .pad{padding:32px 20px 8px}
 .bio{margin:0;font-size:17px;line-height:1.55;color:#e6e6e6}
+.club{margin:24px 0 0;padding:32px 20px 28px;background:#ffc21a;color:#111}
+.club h2{margin:0 0 8px;font-family:'Bowlby One',sans-serif;font-weight:400;font-size:clamp(34px,11vw,56px);line-height:1;letter-spacing:.01em}
+.club p{margin:0 0 16px;font-size:15px;line-height:1.45;max-width:46ch}
+.club form{display:flex;flex-direction:column;gap:10px;max-width:460px}
+.club input[type=email]{min-height:52px;border:3px solid #111;background:#fff;color:#111;padding:0 14px;font:inherit;font-size:16px;border-radius:0;width:100%}
+.club .cn{display:flex;gap:10px;align-items:flex-start;font-size:12px;line-height:1.4;cursor:pointer}
+.club .cn input{width:22px;height:22px;flex:none;margin:0;accent-color:#111}
+.club button{min-height:52px;border:3px solid #111;background:#111;color:#ffc21a;font:inherit;font-weight:800;font-size:15px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.club .done{font-weight:700;font-size:16px;margin:0}
 footer{padding:32px 20px 40px;font-size:13px;color:var(--mut);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 /* hub */
 .hub{display:flex;flex-direction:column;height:100dvh;min-height:640px}
@@ -429,7 +438,7 @@ def page(lang, rel, title, body, accent="#ffc21a", up=0):
 {HEAD}
 <link rel="stylesheet" href="{root}assets/style.css">
 </head><body style="--ac:{accent}">
-<div id="app">{body.replace('@ROOT@', root).replace('@LANG@', lang).replace('@SW@', sw)}</div>
+<div id="app">{body.replace('@ROOT@', root).replace('@LANG@', lang).replace('@SW@', sw).replace('@CLUB@', club_block(lang))}</div>
 <div id="dock" hidden></div><div id="sheet" hidden></div>
 <script src="{root}assets/site.js"></script>
 </body></html>"""
@@ -454,8 +463,36 @@ def top(lang, active, subs, up):
 <nav class="sub">{subhtml}</nav></div>"""
 
 
+# Newsletter ("Join the club"). Fill CLUB["action"] with the form POST URL from the
+# mailing service (MailerLite / Buttondown / Mailchimp / Kit ...). While it is empty
+# the signup block is not rendered, so the live site never shows a dead form.
+CLUB = {"action": "", "field": "email", "hidden": {}}
+CLUB_T = {
+    "title": {"hu": "JOIN THE CLUB", "en": "JOIN THE CLUB"},
+    "text": {"hu": "Új zenék, videók, pluginek és koncertek: elsőként értesülsz róluk. Se spam, se felesleges levél.",
+             "en": "New music, videos, plugins and shows: you hear about them first. No spam, no filler."},
+    "email": {"hu": "E-mail-címed", "en": "Your email"},
+    "btn": {"hu": "Feliratkozom", "en": "Join"},
+    "consent": {"hu": "Hozzájárulok, hogy Shane 54 hírlevelet küldjön az e-mail-címemre. Bármikor leiratkozhatok.",
+                "en": "I agree to receive Shane 54's newsletter by email. I can unsubscribe at any time."},
+    "ok": {"hu": "Köszi! Nézd meg a postaládád, és erősítsd meg a feliratkozást.",
+           "en": "Thanks! Check your inbox and confirm your subscription."},
+}
+
+
+def club_block(lang):
+    if not CLUB["action"]:
+        return ""
+    hid = "".join(f'<input type="hidden" name="{e(k)}" value="{e(v)}">' for k, v in CLUB["hidden"].items())
+    return (f'<section class="club" id="club"><h2>{CLUB_T["title"][lang]}</h2><p>{e(CLUB_T["text"][lang])}</p>'
+            f'<form action="{e(CLUB["action"])}" method="post" data-ok="{e(CLUB_T["ok"][lang])}">{hid}'
+            f'<input type="email" name="{e(CLUB["field"])}" placeholder="{e(CLUB_T["email"][lang])}" required autocomplete="email" aria-label="{e(CLUB_T["email"][lang])}">'
+            f'<label class="cn"><input type="checkbox" required><span>{e(CLUB_T["consent"][lang])}</span></label>'
+            f'<button type="submit">{CLUB_T["btn"][lang]}</button></form></section>')
+
+
 def foot():
-    return ('<footer><span>© Shane 54</span>'
+    return ('@CLUB@<footer><span>© Shane 54</span>'
             f'<span><a href="https://open.spotify.com/artist/{SPOTIFY}">Spotify</a> · <a href="{DISCOGS}">Discogs</a></span></footer>')
 
 

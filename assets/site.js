@@ -225,4 +225,14 @@
   window.addEventListener('popstate', function () { go(location.href, false); });
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+
+  // newsletter form: submit in place, show the thank-you text
+  document.addEventListener('submit', function (ev) {
+    var f = ev.target;
+    if (!f || !f.closest || !f.closest('.club')) return;
+    ev.preventDefault();
+    var btn = f.querySelector('button'); if (btn) btn.disabled = true;
+    var ok = function () { var p = document.createElement('p'); p.className = 'done'; p.textContent = f.getAttribute('data-ok') || 'OK'; f.replaceWith(p); };
+    fetch(f.action, { method: 'POST', body: new FormData(f), mode: 'no-cors' }).then(ok, function () { f.submit(); });
+  });
 })();
