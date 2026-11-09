@@ -239,7 +239,7 @@ SOLO = [("2007", "1000 Lullabies", "", "Shah-Music Digital", "SINGLE"),
         ("2003", "I'm A Slave 4 U (Shane 54's Pink Flood Remix)", "Britney Spears", "", "REMIX"),
         ("2002", "Music (Shane 54's Pink Flood Remix)", "Madonna", "White label", "REMIX"),
         ("2002", "Believe In Me (Shane 54's Pink Flood Remix)", "Lenny Kravitz", "White label", "REMIX"),
-        ("2002", "Ibiza Sunrise (Shane 54 Remix)", "", "White label", "REMIX")]
+        ("2001", "Ibiza Sunrise (Pink Flood vs. Shane 54 Monster Mix)", "Labworks", "EMT Design", "REMIX")]
 
 DISCO = [("MYON & SHANE 54 · 2008–2015", "https://www.discogs.com/artist/1239503-Myon-Shane-54", MYON),
          ("SHANE 54 · 2001–2022", DISCOGS, SOLO)]
