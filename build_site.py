@@ -155,7 +155,11 @@ MYON = [("2016", "Round We Go", "Myon & Shane 54 x Haley", "", "SINGLE"),
         ("2009", "Never Say Never (Myon & Shane 54 Remix)", "Armin van Buuren feat. Jacqueline Govaert", "Armind", "REMIX"),
         ("2008", "Out Of The Sky (Myon & Shane 54 Black Army Remix)", "Lange feat. Sarah Howells", "Black Hole Recordings", "REMIX"),
         ("2008", "So Much More (Myon & Shane 54 Remix)", "Andy Moor & Carrie Skipper", "AVA Recordings", "REMIX"),
-        ("2008", "Fake Awake (Myon & Shane 54 Remix)", "Andy Moor", "Anjunabeats", "REMIX")]
+        ("2008", "Fake Awake (Myon & Shane 54 Remix)", "Andy Moor", "Anjunabeats", "REMIX"),
+        ("2011", "Promises (Myon & Shane 54 Summer Of Love Remix)", "Andain", "Black Hole Recordings", "REMIX"),
+        ("2011", "Original Sin (Myon & Shane 54 Club Redemption)", "Hybrid", "Distinct'ive Records", "REMIX"),
+        ("2011", "Inside 11B (Myon & Shane 54 Summer Of Love Remix)", "LTN", "Morrison Recordings", "REMIX"),
+        ("2009", "Just Listen (Myon & Shane 54 Remix)", "Above & Beyond Presents OceanLab", "Anjunabeats", "REMIX")]
 
 SOLO = [("2007", "1000 Lullabies", "", "Shah-Music Digital", "SINGLE"),
         ("2006", "Laptop DJ", "", "EMI", "ALBUM"),
