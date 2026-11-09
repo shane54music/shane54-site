@@ -204,15 +204,19 @@ SOLO = [("2007", "1000 Lullabies", "", "Shah-Music Digital", "SINGLE"),
         ("2003", "Jégbörtön (Shane 54 Radio Edit)", "Évi", "Idea Produkció", "REMIX"),
         ("2002", "Nem Jön Álom A Szememre (Shane 54 Remix)", "TNT", "Magneoton", "REMIX"),
         ("2002", "Érezd Velem (Shane 54's Airpanel Edit)", "Plastic", "Zebra", "REMIX"),
-        ("2002", "Believe In Me (Shane 54's Pink Flood Remix)", "Kühl", "Planetarium Recordings", "REMIX"),
         ("2001", "I Love You (Shane 54 Remix)", "Cosmicman", "EMT Design", "REMIX"),
         ("2001", "Darabokban Hever A Szívem (Shane 54 Radio Mix)", "Bery", "EMI", "REMIX"),
         ("2001", "Miért (Shane 54 Mix)", "V-Tech", "EMI", "REMIX"),
         ("2005", "Rómeó és Júlia: Lehetsz Király (Remix)", "Mindhalálig Musical – Az Operettszínház Sztárjaival", "Pentaton", "REMIX"),
         ("2004", "Time Of Your Life (Shane 54 Mix)", "Paul Oakenfold feat. Perry Farrell", "Creamfields", "REMIX"),
-        ("2004", "No More Rain (Shane 54 Remix)", "", "Vandit Records", "REMIX"),
-        ("2003", "All Of My Life (Shane 54's Pink Flood Remix)", "Aluna", "", "REMIX"),
-        ("2003", "All Of My Life (Shane 54's Airpanel Mix)", "Aluna", "", "REMIX")]
+        ("2003", "All Of My Life (Shane 54's Airpanel Mix)", "Aluna", "", "REMIX"),
+        ("2005", "Insecurity (Shane 54 Monster Mix)", "Pink Flood feat. Sun", "Beat This Records", "REMIX"),
+        ("2004", "VV3 (Shane 54 Monster Mix)", "", "M-RTL Rt.", "REMIX"),
+        ("2004", "No More Rain (Shane 54 Refill)", "Malte & Marc De Clarq presents MMDC", "Vandit Records", "REMIX"),
+        ("2004", "All Of My Life (Shane 54's Pink Flood Remix)", "Aluna", "Tommy Boy Silver Label", "REMIX"),
+        ("2003", "Believe In Me (Shane 54's Pink Flood Remix)", "Sun", "Yris", "REMIX"),
+        ("2003", "Don't Think It (Feel It) (Shane 54 Remix)", "Lange feat. Leah", "Radikal Records", "REMIX"),
+        ("2003", "Anomaly – Calling Your Name (Shane 54's Monster Mix)", "Libra presents Taylor", "Captivating Sounds", "REMIX")]
 
 DISCO = [("MYON & SHANE 54 · 2008–2015", "https://www.discogs.com/artist/1239503-Myon-Shane-54", MYON),
          ("SHANE 54 · 2001–2007", DISCOGS, SOLO)]
