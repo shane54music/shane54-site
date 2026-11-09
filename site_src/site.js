@@ -235,4 +235,17 @@
     var ok = function () { var p = document.createElement('p'); p.className = 'done'; p.textContent = f.getAttribute('data-ok') || 'OK'; f.replaceWith(p); };
     fetch(f.action, { method: 'POST', body: new FormData(f), mode: 'no-cors' }).then(ok, function () { f.submit(); });
   });
+
+  // "Join the club" sheet, reachable from every page
+  function clubSheet(open) {
+    var s = document.getElementById('clubsheet'); if (!s) return;
+    s.hidden = !open; document.documentElement.classList.toggle('club-open', !!open);
+    if (open) { var i = s.querySelector('input[type=email]'); if (i) setTimeout(function () { i.focus(); }, 50); }
+  }
+  document.addEventListener('click', function (ev) {
+    var t = ev.target;
+    if (t.closest && t.closest('[data-club]')) { ev.preventDefault(); clubSheet(true); }
+    else if (t.id === 'clubsheet' || (t.closest && t.closest('.cs-x'))) { clubSheet(false); }
+  });
+  document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') clubSheet(false); });
 })();

@@ -285,6 +285,14 @@ h1.t{margin:0 0 16px;font-family:'Bowlby One',sans-serif;font-weight:400;font-si
 section{scroll-margin-top:200px}
 .pad{padding:32px 20px 8px}
 .bio{margin:0;font-size:17px;line-height:1.55;color:#e6e6e6}
+.hr{display:flex;align-items:center;gap:10px}
+.clubbtn{min-height:36px;padding:0 12px;border:2px solid #ffc21a;background:#ffc21a;color:#111;font:inherit;font-weight:800;font-size:11px;letter-spacing:.06em;border-radius:999px;cursor:pointer;white-space:nowrap}
+#clubsheet{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.72);display:flex;align-items:flex-end;justify-content:center}
+#clubsheet[hidden]{display:none}
+#clubsheet .cs-in{position:relative;width:100%;max-width:520px;max-height:92dvh;overflow:auto;padding-bottom:env(safe-area-inset-bottom)}
+#clubsheet .club{margin:0;padding-top:44px}
+.cs-x{position:absolute;right:6px;top:4px;width:44px;height:44px;border:0;background:none;color:#111;font-size:32px;line-height:1;cursor:pointer;z-index:1}
+html.club-open{overflow:hidden}
 .club{margin:24px 0 0;padding:32px 20px 28px;background:#ffc21a;color:#111}
 .club h2{margin:0 0 8px;font-family:'Bowlby One',sans-serif;font-weight:400;font-size:clamp(34px,11vw,56px);line-height:1;letter-spacing:.01em}
 .club p{margin:0 0 16px;font-size:15px;line-height:1.45;max-width:46ch}
@@ -438,8 +446,8 @@ def page(lang, rel, title, body, accent="#ffc21a", up=0):
 {HEAD}
 <link rel="stylesheet" href="{root}assets/style.css">
 </head><body style="--ac:{accent}">
-<div id="app">{body.replace('@ROOT@', root).replace('@LANG@', lang).replace('@SW@', sw).replace('@CLUB@', club_block(lang))}</div>
-<div id="dock" hidden></div><div id="sheet" hidden></div>
+<div id="app">{body.replace('@ROOT@', root).replace('@LANG@', lang).replace('@SW@', sw).replace('@CLUB@', club_block(lang)).replace('@CLUBBTN@', club_btn(lang))}</div>
+<div id="dock" hidden></div><div id="sheet" hidden></div>{club_sheet(lang)}
 <script src="{root}assets/site.js"></script>
 </body></html>"""
 
@@ -458,7 +466,7 @@ def top(lang, active, subs, up):
     for i, (label, href) in enumerate(subs):
         subhtml += f'<a href="{href}"{" class=on" if i == 0 else ""}>{label}</a>'
     return f"""<div class="top"><header>
-<a class="logo" href="@ROOT@@LANG@/"><b>SHANE</b><i>54</i></a><a class="lang" href="@SW@">{'EN' if lang == 'hu' else 'HU'}</a></header>
+<a class="logo" href="@ROOT@@LANG@/"><b>SHANE</b><i>54</i></a><span class="hr">@CLUBBTN@<a class="lang" href="@SW@">{'EN' if lang == 'hu' else 'HU'}</a></span></header>
 <nav class="strip">{tiles}</nav>
 <nav class="sub">{subhtml}</nav></div>"""
 
@@ -480,15 +488,27 @@ CLUB_T = {
 }
 
 
-def club_block(lang):
+def club_block(lang, sheet=False):
     if not CLUB["action"]:
         return ""
     hid = "".join(f'<input type="hidden" name="{e(k)}" value="{e(v)}">' for k, v in CLUB["hidden"].items())
-    return (f'<section class="club" id="club"><h2>{CLUB_T["title"][lang]}</h2><p>{e(CLUB_T["text"][lang])}</p>'
+    return (f'<section class="club"{"" if sheet else " id=club"}><h2>{CLUB_T["title"][lang]}</h2><p>{e(CLUB_T["text"][lang])}</p>'
             f'<form action="{e(CLUB["action"])}" method="post" data-ok="{e(CLUB_T["ok"][lang])}">{hid}'
             f'<input type="email" name="{e(CLUB["field"])}" placeholder="{e(CLUB_T["email"][lang])}" required autocomplete="email" aria-label="{e(CLUB_T["email"][lang])}">'
             f'<label class="cn"><input type="checkbox" required><span>{e(CLUB_T["consent"][lang])}</span></label>'
             f'<button type="submit">{CLUB_T["btn"][lang]}</button></form></section>')
+
+
+def club_btn(lang):
+    if not CLUB["action"]:
+        return ""
+    return f'<button type="button" class="clubbtn" data-club>{CLUB_T["title"][lang]}</button>'
+
+
+def club_sheet(lang):
+    if not CLUB["action"]:
+        return ""
+    return f'<div id="clubsheet" hidden><div class="cs-in"><button type="button" class="cs-x" aria-label="Close">×</button>{club_block(lang, True)}</div></div>'
 
 
 def foot():
@@ -505,7 +525,7 @@ def build_hub(lang):
                    f'<div class="sh"></div><div class="tx"><div><small>0{n}</small><h2>{T[s][lang]}</h2><p>{e(T["sub_" + s][lang])}</p></div>'
                    f'<span class="go" style="background:{ACCENT[s]}">→</span></div></a>')
     body = (f'<div class="hub"><header><a class="logo" href="./"><b>SHANE</b><i>54</i></a>'
-            f'<a class="lang" href="@SW@">{"EN" if lang == "hu" else "HU"}</a></header>{panels}</div>')
+            f'<span class="hr">@CLUBBTN@<a class="lang" href="@SW@">{"EN" if lang == "hu" else "HU"}</a></span></header>{panels}</div>')
     return page(lang, "", "Shane 54", body, up=1)
 
 
