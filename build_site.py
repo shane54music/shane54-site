@@ -104,8 +104,10 @@ VIDEOS = [("RMMwct1Lm44", "Panic Attack", "Shane 54 x Alex Sonata & TheRio"),
           ("7aUA37jTRuo", "Startup", "Honeybeast")]
 
 MYON = [("2016", "Round We Go", "Myon & Shane 54 x Haley", "Ride Recordings", "SINGLE"),
-        ("—", "Round We Go (Remixes)", "Myon & Shane 54 x Haley", "Ride Recordings", "SINGLE"),
+        ("2016", "Round We Go (Remixes)", "Myon & Shane 54 x Haley", "Ride Recordings", "SINGLE"),
         ("2015", "Wicked Game", "", "Ride Recordings", "SINGLE"),
+        ("2014", "Summer Of Love (Remixes)", "Myon & Shane 54 + Kyler England", "Ride Recordings", "SINGLE"),
+        ("2013", "Outshine (Remixes)", "Myon & Shane 54 with Natalie Peris", "Ride Recordings", "SINGLE"),
         ("2014", "Hurricane (Remixes)", "Myon & Shane 54 with Amy Pearson", "Ride Recordings", "SINGLE"),
         ("2014", "Under Your Cloud", "Myon & Shane 54 + Late Night Alumni", "Ride Recordings", "SINGLE"),
         ("2014", "If I Fall", "Cole Plante with Myon & Shane 54", "Hollywood Records", "SINGLE"),
