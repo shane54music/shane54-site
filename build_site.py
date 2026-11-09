@@ -192,10 +192,25 @@ SOLO = [("2007", "1000 Lullabies", "", "Shah-Music Digital", "SINGLE"),
         ("2004", "Back From Your Past", "Misja Helsloot feat. Shane 54", "First Second Records", "SINGLE"),
         ("2003", "69 Remixes", "DJ Junior & Shane 54 feat. Michelle Wild", "", "PROMO"),
         ("2002", "Souvenir De Chine", "", "Afterglow Records", "SINGLE"),
-        ("2002", "Equinoxe 4", "", "DTF Recordings", "SINGLE")]
+        ("2002", "Equinoxe 4", "", "DTF Recordings", "SINGLE"),
+        ("2007", "Lost & Found (Shane 54 vs. Orange Project Remix)", "Mr Sam", "Black Hole Recordings", "REMIX"),
+        ("2006", "I Can... (Shane 54 Remix)", "Tatana", "Sirup", "REMIX"),
+        ("2006", "És Mégis (Shane 54 Remix)", "", "EMI", "REMIX"),
+        ("2004", "Gamemaster (Shane 54 Remix)", "Matt Darey presents Lost Tribe", "Darey Products", "REMIX"),
+        ("2004", "Titok (Airpad Edit)", "Szűcs Judith", "SZJ Kiadó", "REMIX"),
+        ("2004", "Csak Szeress Vagy Menj Tovább (Shane 54 Clubmix)", "Dukai Regina", "Magneoton", "REMIX"),
+        ("2004", "Back From Your Past (S54 Remix)", "Misja Helsloot", "First Second Records", "REMIX"),
+        ("2003", "Halló! (Shane 54 Radiomix)", "R-port", "BMG Hungary", "REMIX"),
+        ("2003", "Jégbörtön (Shane 54 Radio Edit)", "Évi", "Idea Produkció", "REMIX"),
+        ("2002", "Nem Jön Álom A Szememre (Shane 54 Remix)", "TNT", "Magneoton", "REMIX"),
+        ("2002", "Érezd Velem (Shane 54's Airplane Edit)", "Plastic", "Zebra", "REMIX"),
+        ("2002", "Believe In Me (Shane 54's Pink Flood Remix)", "Kühl", "Planetarium Recordings", "REMIX"),
+        ("2001", "I Love You (Shane 54 Remix)", "Cosmicman", "EMT Design", "REMIX"),
+        ("2001", "Darabokban Hever A Szívem (Shane 54 Radio Mix)", "Bery", "EMI", "REMIX"),
+        ("2001", "Miért (Shane 54 Mix)", "V-Tech", "EMI", "REMIX")]
 
 DISCO = [("MYON & SHANE 54 · 2008–2015", "https://www.discogs.com/artist/1239503-Myon-Shane-54", MYON),
-         ("SHANE 54 · 2002–2007", DISCOGS, SOLO)]
+         ("SHANE 54 · 2001–2007", DISCOGS, SOLO)]
 
 CSS = """
 :root{--bg:#111;--fg:#fff;--mut:#bbb}
