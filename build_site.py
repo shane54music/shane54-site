@@ -451,7 +451,7 @@ def page(lang, rel, title, body, accent="#ffc21a", up=0):
 {HEAD}
 <link rel="stylesheet" href="{root}assets/style.css">
 <link rel="stylesheet" href="{root}assets/themes/themes.css">
-<script>(function(){{try{{var q=location.search.match(/theme=([\w-]+)/),t=q?q[1]:localStorage.getItem('s54theme');if(q)localStorage.setItem('s54theme',t);if(t&&t!=='default')document.documentElement.setAttribute('data-theme',t)}}catch(e){{}}}})()</script>
+<script>(function(){{try{{var q=location.search.match(/theme=([\\w-]+)/),t=q?q[1]:localStorage.getItem('s54theme');if(q)localStorage.setItem('s54theme',t);if(t&&t!=='default')document.documentElement.setAttribute('data-theme',t)}}catch(e){{}}}})()</script>
 </head><body style="--ac:{accent}">
 <div id="app">{body.replace('@ROOT@', root).replace('@LANG@', lang).replace('@SW@', sw).replace('@CLUB@', club_block(lang)).replace('@CLUBBTN@', club_btn(lang))}</div>
 <div id="dock" hidden></div><div id="sheet" hidden></div>{club_sheet(lang)}
@@ -648,6 +648,32 @@ def build_player_preview():
     return page("hu", "", "Player preview", body, ACCENT["music"], up=1).replace("<head>", '<head><meta name="robots" content="noindex">', 1)
 
 
+def build_stories2():
+    """Data-driven Stories prototype: concepts/stories2/index.html from the template + the site's own data."""
+    import json
+    tpl = (SRC / "concepts" / "stories2" / "template.html").read_text("utf-8")
+    D = {l: {"t": {k: v[l] for k, v in T.items()},
+             **{k: (CONTENT[k][l]) for k in ("art_bio", "plugins_bio", "music_bio", "anim_bio", "id_bio")}} for l in LANGS}
+    for l in LANGS:
+        D[l]["t"]["exh_title"] = CONTENT["exh_title"][l]
+        D[l]["t"]["delay_tag"] = CONTENT["delay_tag"][l]
+        D[l]["t"]["delay_btn"] = CONTENT["delay_btn"][l]
+        D[l]["t"]["delay_fmt"] = CONTENT["delay_fmt"][l]
+    D["paintings"] = [list(p) for p in PAINTINGS]
+    D["exh"] = [[y, m, p] for y, m, p in EXHIBITIONS]
+    D["videos"] = [list(v) for v in VIDEOS]
+    disco = []
+    for head, link, items in DISCO:
+        groups = {"singles": [], "remixes": [], "albums": []}
+        for it in sorted(items, key=lambda x: -int(x[0]) if x[0].isdigit() else 0):
+            y, t, c, lab, k = it
+            groups[disco_cat(it)].append([y, t, c or head.split(" · ")[0].title().replace("&", "&"), lab])
+        disco.append({"name": head.split(" · ")[0].title().replace("Myon & Shane 54", "Myon & Shane 54"), "link": link, "groups": groups})
+    D["disco"] = disco
+    D["club"] = {"action": CLUB["action"], "field": CLUB["field"], "hidden": CLUB["hidden"], "t": CLUB_T}
+    return tpl.replace("/*DATA*/null", json.dumps(D, ensure_ascii=False))
+
+
 def main():
     if OUT.exists():
         shutil.rmtree(OUT)
@@ -668,6 +694,8 @@ def main():
     shutil.copy(SRC / "site.js", OUT / "assets" / "site.js")
     if (SRC / "concepts").exists():
         shutil.copytree(SRC / "concepts", OUT / "concepts")
+        (OUT / "concepts" / "stories2" / "template.html").unlink()
+        (OUT / "concepts" / "stories2" / "index.html").write_text(build_stories2(), "utf-8")
     if (SRC / "themes").exists():
         shutil.copytree(SRC / "themes", OUT / "assets" / "themes")
     (OUT / "assets" / "style.css").write_text(CSS, "utf-8")
