@@ -124,7 +124,28 @@ MYON = [("2016", "Round We Go", "Myon & Shane 54 x Haley", "", "SINGLE"),
         ("2009", "All Night Rock And Roll", "Myon & Shane 54", "Jigsaw Digital", "SINGLE"),
         ("2008", "Not A Lot Left / The Beach", "Myon & Shane 54", "Anjunabeats", "SINGLE"),
         ("2008", "Trapped", "Myon & Shane 54", "In Trance We Trust", "SINGLE"),
-        ("2008", "Vampire", "Myon & Shane 54 feat. Carrie Skipper", "Armind", "SINGLE")]
+        ("2008", "Vampire", "Myon & Shane 54 feat. Carrie Skipper", "Armind", "SINGLE"),
+        ("2011", "Without Warning (Myon & Shane 54 Monster Mix)", "Exostate", "Enhanced Recordings", "REMIX"),
+        ("2011", "Drowning (Myon & Shane 54 Classic Mix)", "Trance 100 2011 Volume 2 (Various)", "Armada", "REMIX"),
+        ("2011", "Never Be The Same (Myon & Shane 54 Monster Mix)", "Soundpiercing – Best Of 2011 (Various)", "Soundpiercing / Armada Digital", "REMIX"),
+        ("2011", "Connection (Myon & Shane 54 Monsterless Mix)", "Susana", "Armada Digital", "REMIX"),
+        ("2010", "Irresistible (Myon & Shane 54 Vocal Mix)", "Nervo feat. Ollie James", "Zouk Recordings", "REMIX"),
+        ("2010", "Triangle (Myon & Shane 54 Classic Mix)", "Nadia Ali", "Smile In Bed", "REMIX"),
+        ("2010", "I'm In Love (Myon & Shane 54 Vocal Mix)", "Compact Disco", "Mathouse Records", "REMIX"),
+        ("2010", "Im Reaching (Myon & Shane 54 Remix)", "Will Dukster feat. Solncè", "Infra Progressive", "REMIX"),
+        ("2010", "Face (Myon & Shane 54 Remix)", "Trance 100 2010 Volume 1 (Various)", "Armada", "REMIX"),
+        ("2009", "7 Days & One Week (Myon & Shane 54 Remix Edit)", "Above & Beyond", "Ministry Of Sound", "REMIX"),
+        ("2009", "Last One Out (Myon & Shane 54 Remix)", "Gabriel Lukosz feat. Rachele Warner", "Lange Recordings", "REMIX"),
+        ("2009", "Disconnected (Myon & Shane 54 Vocal Mix)", "Michael Angelo feat. Jenry R", "High Light Records", "REMIX"),
+        ("2009", "How Does It Feel (Myon & Shane 54 Vocal Mix)", "Adiva feat. Vicky Fee", "Coldharbour Recordings", "REMIX"),
+        ("2009", "Under Your Spell (Myon & Shane 54 Monster Mix)", "Cosmic Gate feat. Aruna", "Black Hole Recordings", "REMIX"),
+        ("2009", "Never Say Never (Myon & Shane 54 Remix)", "Armada Trance 6 (Various)", "Armada", "REMIX"),
+        ("2009", "So Much More (Myon & Shane 54 Remix)", "Trance 100 2009 (Various)", "Armada", "REMIX"),
+        ("2009", "Right Here Right Now (Myon & Shane 54 Remix)", "BWO", "Bonnier Music", "REMIX"),
+        ("2009", "Faces (Myon & Shane 54 Monster Mix)", "Andy Moor", "Armada", "REMIX"),
+        ("2009", "Change Your Mind (Myon & Shane 54 Remix)", "Armin van Buuren", "Armada", "REMIX"),
+        ("2008", "Vela (Myon & Shane 54 Remix)", "Anjunadeep November Sampler 2008 (Various)", "Anjunabeats", "REMIX"),
+        ("2008", "Barcelona (Shane 54 & Myon Retrofuturism Edit)", "BWO", "Capitol Records", "REMIX")]
 
 SOLO = [("2007", "1000 Lullabies", "", "Shah-Music Digital", "SINGLE"),
         ("2006", "Laptop DJ", "", "EMI", "ALBUM"),
@@ -387,6 +408,8 @@ def build_plugins(lang):
 
 def disco_cat(it):
     y, t, c, l, k = it
+    if k == "REMIX":
+        return "remixes"
     if k in ("ALBUM", "COMP", "MIX", "DIGITAL"):
         return "albums"
     if "remix" in t.lower() or k == "PROMO" or (k == "EP" and "remix" in t.lower()):
@@ -403,6 +426,8 @@ def build_music(lang):
         groups = {"singles": [], "remixes": [], "albums": []}
         for it in items:
             groups[disco_cat(it)].append(it)
+        for g in groups.values():
+            g.sort(key=lambda x: -int(x[0]))
         for key in ("singles", "remixes", "albums"):
             g = groups[key]
             if not g:
