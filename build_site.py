@@ -9,18 +9,18 @@ from pathlib import Path
 ROOT = Path(__file__).parent
 SRC, OUT = ROOT / "site_src", ROOT / "dist"
 LANGS = ["hu", "en"]
-SECTIONS = ["art", "plugins", "music", "animation"]
-ACCENT = {"art": "#ff8fb1", "plugins": "#ffc21a", "music": "#5ad1ff", "animation": "#ff8a3d"}
-TILE = {"art": ("p01.jpg", "50% 55%"), "plugins": ("delay_ui.jpg", "12% 50%"),
+SECTIONS = ["art", "software", "music", "animation"]
+ACCENT = {"art": "#ff8fb1", "software": "#ffc21a", "music": "#5ad1ff", "animation": "#ff8a3d"}
+TILE = {"art": ("p01.jpg", "50% 55%"), "software": ("delay_ui.jpg", "12% 50%"),
         "music": ("dj.jpg", "50% 75%"), "animation": ("p08.jpg", "50% 50%")}
 SPOTIFY = "2ITbqEgyp32vL3BxEFmQ1V"
 DISCOGS = "https://www.discogs.com/artist/18440-Shane-54"
 
 T = {  # UI texts
-    "art": {"hu": "ART", "en": "ART"}, "plugins": {"hu": "PLUGINS", "en": "PLUGINS"},
+    "art": {"hu": "ART", "en": "ART"}, "software": {"hu": "SOFTWARE", "en": "SOFTWARE"},
     "music": {"hu": "MUSIC", "en": "MUSIC"}, "animation": {"hu": "ANIMATION", "en": "ANIMATION"},
     "sub_art": {"hu": "110 festmény", "en": "110 paintings"},
-    "sub_plugins": {"hu": "Space Cat Delay · Berlin School · Reverb", "en": "Space Cat Delay · Berlin School · Reverb"},
+    "sub_software": {"hu": "Space Cat Delay · Berlin School · Reverb", "en": "Space Cat Delay · Berlin School · Reverb"},
     "sub_music": {"hu": "Számok · mixek · podcast", "en": "Tracks · mixes · podcast"},
     "sub_animation": {"hu": "Zenei videók, animátorként", "en": "Music videos, as an animator"},
     "bio": {"hu": "BIO", "en": "BIO"}, "gallery": {"hu": "GALÉRIA", "en": "GALLERY"},
@@ -61,7 +61,7 @@ CONTENT = {
         "hu": "Az International Departures a podcastom volt. Évekkel ezelőtt véget ért, az archívumot később újra elérhetővé teszem itt.",
         "en": "International Departures was my podcast. It ended years ago; I will make the archive available here again."},
     "id_soon": {"hu": "Az archívum hamarosan feltöltődik.", "en": "The archive is coming soon."},
-    "more_plugins": {"hu": "TOVÁBBI PLUGINEK", "en": "MORE PLUGINS"},
+    "more_plugins": {"hu": "TOVÁBBI SZOFTVEREK", "en": "MORE SOFTWARE"},
     "coming": {"hu": "Készülőben", "en": "In development"},
     "delay_tag": {"hu": "Atmospheric Echo Machine", "en": "Atmospheric Echo Machine"},
     "delay_btn": {"hu": "LETÖLTÉS: HAMAROSAN", "en": "DOWNLOAD: COMING SOON"},
@@ -241,7 +241,7 @@ def page(lang, rel, title, body, accent="#ffc21a", up=0):
 <html lang="{lang}"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{e(title)}</title>
-<meta name="description" content="Shane 54: art, plugins, music, animation.">
+<meta name="description" content="Shane 54: art, software, music, animation.">
 <meta property="og:title" content="{e(title)}"><meta property="og:image" content="{root}assets/img/dj.jpg">
 <link rel="icon" href="{root}assets/img/favicon.png">
 {HEAD}
@@ -280,7 +280,7 @@ def build_hub(lang):
     panels = ""
     for n, s in enumerate(SECTIONS, 1):
         img, pos = TILE[s]
-        posd = {"art": "50% 55%", "plugins": "50% 20%", "music": "50% 70%", "animation": "50% 50%"}[s]
+        posd = {"art": "50% 55%", "software": "50% 20%", "music": "50% 70%", "animation": "50% 50%"}[s]
         panels += (f'<a class="panel" href="{s}/"><img src="../assets/img/{img}" alt="" style="object-position:{posd}">'
                    f'<div class="sh"></div><div class="tx"><div><small>0{n}</small><h2>{T[s][lang]}</h2><p>{e(T["sub_" + s][lang])}</p></div>'
                    f'<span class="go" style="background:{ACCENT[s]}">→</span></div></a>')
@@ -304,8 +304,8 @@ def build_art(lang):
 
 def build_plugins(lang):
     subs = [(T["bio"][lang], "#bio"), (T["delay"][lang], "#delay")]
-    body = (top(lang, "plugins", subs, 2) +
-            f'<section id="bio" class="pad"><h1 class="t">PLUGINS</h1><p class="bio">{e(CONTENT["plugins_bio"][lang])}</p></section>'
+    body = (top(lang, "software", subs, 2) +
+            f'<section id="bio" class="pad"><h1 class="t">SOFTWARE</h1><p class="bio">{e(CONTENT["plugins_bio"][lang])}</p></section>'
             '<section id="delay" style="padding-top:16px"><div class="plug"><div class="st"><i style="flex:3;background:#ff8a3d"></i><i style="flex:2;background:#e4572e"></i><i style="flex:1;background:#2e86e4"></i></div>'
             '<div class="head"><img src="@ROOT@assets/img/spacecat_only.png" alt="Space Cat" style="width:86%">'
             '<img src="@ROOT@assets/img/delay_logo.png" alt="Delay" style="width:86%;margin-top:14px"></div>'
@@ -317,7 +317,7 @@ def build_plugins(lang):
             f'<div class="rowc"><div class="sw" style="background:#7a3fe4"></div><div><b style="font-size:17px">BERLIN SCHOOL</b><div style="font-size:13px;color:#b8c0d4">{CONTENT["coming"][lang]} · VST3 · AU</div></div></div>'
             f'<div class="rowc"><div class="sw" style="background:#2e86e4"></div><div><b style="font-size:17px">SPACE CAT REVERB</b><div style="font-size:13px;color:#b8c0d4">{CONTENT["coming"][lang]} · VST3 · AU</div></div></div></section>'
             + foot())
-    return page(lang, "plugins/", "Plugins — Shane 54", body, ACCENT["plugins"], up=2)
+    return page(lang, "software/", "Software — Shane 54", body, ACCENT["software"], up=2)
 
 
 def build_music(lang):
@@ -382,7 +382,7 @@ def main():
         '<script>location.replace((navigator.language||"hu").slice(0,2)=="hu"?"hu/":"en/")</script>'
         '<noscript><meta http-equiv="refresh" content="0;url=hu/"></noscript><a href="hu/">Shane 54</a>', "utf-8")
     for lang in LANGS:
-        for rel, fn in (("", build_hub), ("art", build_art), ("plugins", build_plugins), ("music", build_music),
+        for rel, fn in (("", build_hub), ("art", build_art), ("software", build_plugins), ("music", build_music),
                         ("music/id", build_id), ("animation", build_animation)):
             d = OUT / lang / rel
             d.mkdir(parents=True, exist_ok=True)
