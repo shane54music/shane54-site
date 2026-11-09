@@ -167,7 +167,8 @@ MYON = [("2016", "Round We Go", "Myon & Shane 54 x Haley", "", "SINGLE"),
         ("2009", "Eliana (Myon & Shane 54 Monster Mix)", "Khaz & Boris M.D.", "Coldharbour Recordings", "REMIX"),
         ("2009", "Anatolian Emotions (Myon & Shane 54 Remix)", "Faruk Sabanci & Nurettin Colak", "Arisa Audio", "REMIX"),
         ("2008", "Secret Garden (Myon & Shane 54 Black Army Remix)", "Esmaye", "Black Hole Recordings", "REMIX"),
-        ("2008", "Vela (Myon & Shane 54 Remix)", "Jaytech", "Anjunadeep", "REMIX")]
+        ("2008", "Vela (Myon & Shane 54 Remix)", "Jaytech", "Anjunadeep", "REMIX"),
+        ("2011", "Sinéad (Myon & Shane 54 Triplet Monster Mix)", "Within Temptation", "", "REMIX")]
 
 SOLO = [("2007", "1000 Lullabies", "", "Shah-Music Digital", "SINGLE"),
         ("2006", "Laptop DJ", "", "EMI", "ALBUM"),
