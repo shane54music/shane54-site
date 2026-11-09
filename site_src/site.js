@@ -248,4 +248,28 @@
     else if (t.id === 'clubsheet' || (t.closest && t.closest('.cs-x'))) { clubSheet(false); }
   });
   document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') clubSheet(false); });
+
+  // STYLE PREVIEW chip (temporary: lets the owner flip through design variants)
+  (function () {
+    var L = ['default', 'slick-obsidian', 'slick-chrome', 'conservative-ledger', 'conservative-gallery', 'flashy-neon', 'flashy-pop', 'pompous-gold', 'pompous-royal', 'humble-paper', 'humble-mono'];
+    var N = { 'default': 'Current', 'slick-obsidian': 'Superslick 1 · Obsidian', 'slick-chrome': 'Superslick 2 · Chrome', 'conservative-ledger': 'Conservative 1 · Ledger', 'conservative-gallery': 'Conservative 2 · Gallery', 'flashy-neon': 'Flashy 1 · Neon', 'flashy-pop': 'Flashy 2 · Pop', 'pompous-gold': 'Pompous 1 · Gold', 'pompous-royal': 'Pompous 2 · Royal', 'humble-paper': 'Humble 1 · Paper', 'humble-mono': 'Humble 2 · Mono' };
+    var scr = document.querySelector('script[src*="assets/site.js"]'); if (!scr) return;
+    var base = scr.getAttribute('src').replace('site.js', 'themes/');
+    var cur = 'default'; try { cur = localStorage.getItem('s54theme') || 'default'; } catch (e) {}
+    var i = Math.max(0, L.indexOf(cur));
+    var c = document.createElement('div');
+    c.style.cssText = 'position:fixed;left:8px;bottom:calc(8px + env(safe-area-inset-bottom));z-index:95;display:flex;align-items:center;background:#000;color:#fff;border:2px solid #fff;border-radius:999px;font:700 12px/1 Arial,sans-serif;box-shadow:0 4px 16px rgba(0,0,0,.5)';
+    c.innerHTML = '<button type="button" data-d="-1" style="width:44px;height:40px;background:none;border:0;color:#fff;font-size:18px">‹</button><span style="min-width:150px;text-align:center"></span><button type="button" data-d="1" style="width:44px;height:40px;background:none;border:0;color:#fff;font-size:18px">›</button>';
+    var sp = c.querySelector('span');
+    function apply() {
+      var t = L[i]; sp.textContent = N[t];
+      try { localStorage.setItem('s54theme', t); } catch (e) {}
+      var l = document.getElementById('themecss');
+      if (t === 'default') { if (l) l.remove(); return; }
+      if (!l) { l = document.createElement('link'); l.rel = 'stylesheet'; l.id = 'themecss'; document.head.appendChild(l); }
+      l.href = base + t + '.css';
+    }
+    c.addEventListener('click', function (ev) { var d = ev.target.getAttribute && ev.target.getAttribute('data-d'); if (!d) return; i = (i + +d + L.length) % L.length; apply(); });
+    document.body.appendChild(c); sp.textContent = N[L[i]];
+  })();
 })();

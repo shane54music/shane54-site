@@ -450,6 +450,7 @@ def page(lang, rel, title, body, accent="#ffc21a", up=0):
 {EPMETA}
 {HEAD}
 <link rel="stylesheet" href="{root}assets/style.css">
+<script>(function(){{try{{var q=location.search.match(/theme=([\w-]+)/),t=q?q[1]:localStorage.getItem('s54theme');if(q)localStorage.setItem('s54theme',t);if(t&&t!=='default'){{var l=document.createElement('link');l.rel='stylesheet';l.id='themecss';l.href='{root}assets/themes/'+t+'.css';document.head.appendChild(l)}}}}catch(e){{}}}})()</script>
 </head><body style="--ac:{accent}">
 <div id="app">{body.replace('@ROOT@', root).replace('@LANG@', lang).replace('@SW@', sw).replace('@CLUB@', club_block(lang)).replace('@CLUBBTN@', club_btn(lang))}</div>
 <div id="dock" hidden></div><div id="sheet" hidden></div>{club_sheet(lang)}
@@ -664,6 +665,8 @@ def main():
     if (SRC / "ep").exists():
         shutil.copytree(SRC / "ep", OUT / "assets" / "ep")
     shutil.copy(SRC / "site.js", OUT / "assets" / "site.js")
+    if (SRC / "themes").exists():
+        shutil.copytree(SRC / "themes", OUT / "assets" / "themes")
     (OUT / "assets" / "style.css").write_text(CSS, "utf-8")
     (OUT / ".nojekyll").write_text("")
     (OUT / "index.html").write_text(
