@@ -126,7 +126,7 @@ MYON = [("2016", "Round We Go", "Myon & Shane 54 x Haley", "", "SINGLE"),
         ("2008", "Trapped", "Myon & Shane 54", "In Trance We Trust", "SINGLE"),
         ("2008", "Vampire", "Myon & Shane 54 feat. Carrie Skipper", "Armind", "SINGLE")]
 
-SOLO = [("2007", "1000 Lullabies", "", "Shah-Music Digital", "DIGITAL"),
+SOLO = [("2007", "1000 Lullabies", "", "Shah-Music Digital", "SINGLE"),
         ("2006", "Laptop DJ", "", "EMI", "ALBUM"),
         ("2006", "Altass El", "Shane 54 feat. Mester Tamás", "EMI", "PROMO"),
         ("2005", "Kippenvelmeter", "Shane 54 vs Abel Ramos", "DTF Spain", "SINGLE"),
