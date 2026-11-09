@@ -224,7 +224,7 @@ SOLO = [("2007", "1000 Lullabies", "", "Shah-Music Digital", "SINGLE"),
         ("2004", "Scirocco (Shane54 Remix)", "Scirocco", "Fenology Records", "REMIX")]
 
 DISCO = [("MYON & SHANE 54 · 2008–2015", "https://www.discogs.com/artist/1239503-Myon-Shane-54", MYON),
-         ("SHANE 54 · 2001–2019", DISCOGS, SOLO)]
+         ("SHANE 54 · 2001–2022", DISCOGS, SOLO)]
 
 CSS = """
 :root{--bg:#111;--fg:#fff;--mut:#bbb}
