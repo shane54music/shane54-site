@@ -184,6 +184,36 @@ footer{padding:32px 20px 40px;font-size:13px;color:var(--mut);display:flex;justi
 .exh .d{width:104px;flex:none;font-size:13px;font-weight:700;color:var(--ac)}
 .exh .p{flex:1;font-size:15px;line-height:1.35}
 .bio+.bio{margin-top:16px}
+/* podcast player */
+#idplayer{border:2px solid #5ad1ff;border-radius:18px;padding:16px;background:#0b0b0b}
+.pl-top{display:flex;gap:14px;align-items:center}
+.pl-cover{width:84px;height:84px;border-radius:12px;background:#5ad1ff;color:#111;display:flex;align-items:center;justify-content:center;flex:none;transition:transform .3s}
+.pl-cover b{font-family:'Bowlby One',sans-serif;font-weight:400;font-size:34px}
+.playing .pl-cover{transform:rotate(-4deg) scale(1.04)}
+.pl-meta{min-width:0}.pl-meta small{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;color:#5ad1ff}
+.pl-title{margin:4px 0 2px;font-size:20px;line-height:1.2;font-weight:700}
+.pl-sub{font-size:13px;color:#bbb}
+.pl-bar{-webkit-appearance:none;appearance:none;width:100%;height:44px;margin:12px 0 0;background:transparent;--p:0%}
+.pl-bar::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:linear-gradient(to right,#5ad1ff var(--p),#2a2a2a var(--p))}
+.pl-bar::-moz-range-track{height:8px;border-radius:4px;background:#2a2a2a}
+.pl-bar::-moz-range-progress{height:8px;border-radius:4px;background:#5ad1ff}
+.pl-bar::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:#fff;border:3px solid #5ad1ff;margin-top:-8px}
+.pl-bar::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid #5ad1ff}
+.pl-times{display:flex;justify-content:space-between;font-size:13px;color:#bbb;margin-top:-6px}
+.pl-ctl{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+.pl-ctl button{border:0;background:transparent;color:#fff;font:inherit;cursor:pointer}
+.pl-spd{width:56px;height:44px;border:2px solid #5ad1ff !important;border-radius:999px;color:#5ad1ff !important;font-weight:700;font-size:14px}
+.pl-spacer{width:56px}
+.pl-prev,.pl-next{width:56px;height:56px;display:flex;align-items:center;justify-content:center}
+.pl-play{width:72px;height:72px;border-radius:50%;background:#5ad1ff !important;color:#111 !important;display:flex;align-items:center;justify-content:center}
+.pl-play svg{width:34px;height:34px}
+.pl-list{margin-top:14px;border-top:1px solid #2a2a2a}
+.pl-row{display:flex;width:100%;align-items:center;gap:12px;text-align:left;border:0;border-bottom:1px solid #2a2a2a;background:transparent;color:#fff;font:inherit;min-height:64px;padding:8px 4px;cursor:pointer}
+.pl-row.on{background:#10222a;box-shadow:inset 4px 0 0 #5ad1ff}
+.pl-n{width:24px;font-size:13px;color:#5ad1ff;font-weight:700;flex:none;text-align:center}
+.pl-t{flex:1;min-width:0}.pl-t b{display:block;font-size:15px;line-height:1.3}.pl-t s{display:block;font-size:12px;color:#bbb;text-decoration:none}
+.pl-d{font-size:13px;color:#bbb;flex:none}
+.pl-msg{color:#bbb;font-size:14px;padding:16px 4px;margin:0}
 /* gallery */
 .gal{columns:2;column-gap:8px;padding:16px 8px 8px}
 .gal a{display:block;margin-bottom:8px;break-inside:avoid}
@@ -373,6 +403,15 @@ def build_animation(lang):
     return page(lang, "animation/", "Animation — Shane 54", body, ACCENT["animation"], up=2)
 
 
+def build_player_preview():
+    body = ('<div style="padding:16px 20px 0"><a class="logo" href="../hu/music/id/"><b>SHANE</b><i>54</i></a></div>'
+            '<section class="pad"><h1 class="t" style="font-size:34px">PLAYER PREVIEW</h1>'
+            '<p class="bio" style="margin-bottom:20px">Demo: three placeholder episodes with a short test tone.</p>'
+            '<div id="idplayer" data-demo="1" data-root="../" data-now="ÉPPEN SZÓL"></div></section>'
+            '<script src="../assets/player.js"></script>')
+    return page("hu", "", "Player preview", body, ACCENT["music"], up=1).replace("<head>", '<head><meta name="robots" content="noindex">', 1)
+
+
 def main():
     if OUT.exists():
         shutil.rmtree(OUT)
@@ -384,6 +423,9 @@ def main():
         Image.open(SRC / "img" / "p01.jpg").resize((64, 64)).save(OUT / "assets" / "img" / "favicon.png")
     except Exception:
         pass
+    (OUT / "assets" / "demo").mkdir()
+    shutil.copy(SRC / "demo" / "demo.wav", OUT / "assets" / "demo" / "demo.wav")
+    shutil.copy(SRC / "player.js", OUT / "assets" / "player.js")
     (OUT / "assets" / "style.css").write_text(CSS, "utf-8")
     (OUT / "assets" / "site.js").write_text(JS, "utf-8")
     (OUT / ".nojekyll").write_text("")
@@ -391,6 +433,8 @@ def main():
         '<!doctype html><meta charset="utf-8"><title>Shane 54</title><meta name="viewport" content="width=device-width,initial-scale=1">'
         '<script>location.replace((navigator.language||"hu").slice(0,2)=="hu"?"hu/":"en/")</script>'
         '<noscript><meta http-equiv="refresh" content="0;url=hu/"></noscript><a href="hu/">Shane 54</a>', "utf-8")
+    (OUT / "preview-player").mkdir()
+    (OUT / "preview-player" / "index.html").write_text(build_player_preview(), "utf-8")
     for lang in LANGS:
         for rel, fn in (("", build_hub), ("art", build_art), ("software", build_plugins), ("music", build_music),
                         ("music/id", build_id), ("animation", build_animation)):
