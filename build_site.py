@@ -508,7 +508,7 @@ def build_music(lang):
         groups = {"singles": [], "remixes": [], "albums": []}
         for it in items:
             groups[disco_cat(it)].append(it)
-        asc = head.startswith("SHANE 54")
+        asc = False
         for key_, g in groups.items():
             yr = lambda x: int(x[0]) if x[0].isdigit() else 0
             if asc and key_ == "remixes":
