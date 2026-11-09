@@ -489,7 +489,7 @@ def disco_cat(it):
         return "remixes"
     if k in ("ALBUM", "COMP", "MIX", "DIGITAL"):
         return "albums"
-    if "remix" in t.lower() or k == "PROMO" or (k == "EP" and "remix" in t.lower()):
+    if k == "PROMO" or ("remix" in t.lower() and k != "SINGLE"):
         return "remixes"
     return "singles"
 
