@@ -234,7 +234,12 @@ SOLO = [("2007", "1000 Lullabies", "", "Shah-Music Digital", "SINGLE"),
         ("2019", "Delirium", "Shane 54 feat. Clara Sofie", "Garuda", "SINGLE"),
         ("2012", "I Can Feel Your Love (Shane 54 Monster Mix)", "Quadraphonic", "Armada Digital", "REMIX"),
         ("2007", "I Can (Shane 54 Laptop DJ Remix)", "Tatana", "S2 Records", "REMIX"),
-        ("2004", "Scirocco (Shane54 Remix)", "Scirocco", "Fenology Records", "REMIX")]
+        ("2004", "Scirocco (Shane54 Remix)", "Scirocco", "Fenology Records", "REMIX"),
+        ("2003", "Outside (Shane 54's Pink Flood Remix)", "George Michael", "", "REMIX"),
+        ("2003", "I'm A Slave 4 U (Shane 54's Pink Flood Remix)", "Britney Spears", "", "REMIX"),
+        ("2002", "Music (Shane 54's Pink Flood Remix)", "Madonna", "White label", "REMIX"),
+        ("2002", "Believe In Me (Shane 54's Pink Flood Remix)", "Lenny Kravitz", "White label", "REMIX"),
+        ("2002", "Ibiza Sunrise (Shane 54 Remix)", "", "White label", "REMIX")]
 
 DISCO = [("MYON & SHANE 54 · 2008–2015", "https://www.discogs.com/artist/1239503-Myon-Shane-54", MYON),
          ("SHANE 54 · 2001–2022", DISCOGS, SOLO)]
@@ -503,8 +508,13 @@ def build_music(lang):
         groups = {"singles": [], "remixes": [], "albums": []}
         for it in items:
             groups[disco_cat(it)].append(it)
-        for g in groups.values():
-            g.sort(key=lambda x: -(int(x[0]) if x[0].isdigit() else 0))
+        asc = head.startswith("SHANE 54")
+        for key_, g in groups.items():
+            yr = lambda x: int(x[0]) if x[0].isdigit() else 0
+            if asc and key_ == "remixes":
+                g.sort(key=lambda x: (yr(x), 0 if x[1].startswith("I Love You (Shane 54") else 1))
+            else:
+                g.sort(key=lambda x: -yr(x))
         for key in ("singles", "remixes", "albums"):
             g = groups[key]
             if not g:
