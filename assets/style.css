@@ -36,6 +36,11 @@ footer{padding:32px 20px 40px;font-size:13px;color:var(--mut);display:flex;justi
 .panel h2{margin:0;font-family:'Bowlby One',sans-serif;font-weight:400;font-size:clamp(34px,9vw,52px);line-height:1.05;color:#fff;-webkit-text-stroke:3px #111;paint-order:stroke fill}
 .panel p{margin:0;font-size:13px}
 .panel .go{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#111;flex:none}
+.exh{padding:8px 20px 0}
+.exh .r{display:flex;gap:14px;padding:12px 0;border-top:1px solid #2a2a2a;min-height:52px;align-items:baseline}
+.exh .d{width:104px;flex:none;font-size:13px;font-weight:700;color:var(--ac)}
+.exh .p{flex:1;font-size:15px;line-height:1.35}
+.bio+.bio{margin-top:16px}
 /* gallery */
 .gal{columns:2;column-gap:8px;padding:16px 8px 8px}
 .gal a{display:block;margin-bottom:8px;break-inside:avoid}

@@ -33,8 +33,21 @@ T = {  # UI texts
 
 CONTENT = {
     "art_bio": {
-        "hu": "A festés ugyanabból a helyből jön, mint a zene. Eddig 110 körüli kép gyűlt össze, nagyrészt macskák. Az egyik macskafej-festményemből lett a Space Cat Delay logója is.",
-        "en": "Painting comes from the same place as the music. About 110 pieces so far, mostly cats. One of my cat-head paintings also became the face of the Space Cat Delay."},
+        "hu": [
+            "A legelső képalkotó MI-rendszerek megjelenésével 2022-ben belecsöppent ebbe a technológiába és a végtelen lehetőségeibe. Amit technikában nélkülözött, azt a látásmódjával pótolta.",
+            "Furcsa módon addig soha semmi köze nem volt a művészethez, különösebben nem is érdekelte. De az MI-képek készítése valahogy megnyitott benne valamit, ami messzebbre vitte, mint bárki – ő maga is – gondolta volna.",
+            "2022 végén két macska „festmény”-renderje, amint egy szintipop zenekart alakítanak, egyik napról a másikra mindent megváltoztatott. Amikor kitette az Instagramra, berobbant: ez jelezte, hogy a macskaművészet olyan út, amit érdemes bejárni.",
+            "Amikor „festményszerű tárgyait” – a nyomatokat átfestette, hogy egyediek legyenek – bemutatta a művészeti közösségnek egy hatalmas budapesti művészeti vásáron, gyorsan megváltozott a megítélés. Azok a macskák egyértelműen slágerek lettek, a következő lépés pedig az volt, hogy hagyományos módon is megfesse őket. Ecsetet és vásznat fogott, rengeteg festés-oktatóvideót nézett meg a YouTube-on (ma is nézi), és soha nem nézett vissza. A víziója megmutatta, merre tart: csak azt kellett kitalálnia, hogyan vigye vászonra az ötleteit. Elég sajátos munkamódszer, de valahogy működött. A közönség sokkal jobban szerette a kézzel festett műveit, mint az MI-„festményeket”, pedig azok is úgy fogytak, mint a cukor.",
+            "Egy évvel később, 2025-ben megrendezte első önálló kiállítását Magyarország egyik legnagyobb galéria- és aukciósházában. A hely teljesen megtelt rajongókkal, akik láthatóan élvezték a Shane által teremtett színes macskavilágot.",
+            "Azóta a híres macskafestmények mellett egy nagy magyar divatmárkával működött együtt, így a macskái az ország összes üzletébe eljutottak. Az elmúlt hónapokban Lóránt Ervin „Hervé” szobrászbarátjával dolgozik: több projekten is azon vannak, hogy a művészetét lehozzák a falról, és valódi terekbe vigyék."],
+        "en": [
+            "With the arrival of the very early image creating AI systems, in 2022 he found himself immersed into this technology and its endless possibilities. What he was lacking in technique, he made up with a vision.",
+            "Oddly enough, up to that point he never had anything to do with art, he wasn’t particularly interested in it. But somehow creating AI images opened up something, that took him way further than anyone - including himself - would have thought.",
+            "Late 2022 a “painting” render of two cats posing as a synth pop band changed everything overnight. When he posted it on his instagram, it blew up, suggesting cat art is an avenue worth discovering.",
+            "As his “painting looking objects” - he painted over the prints to make them unique - were introduced to the art community at a huge art fair in Budapest, perception changed up real fast. Those cats were clearly a hit, and the next step was to make them the traditional way. He grabbed brushes and canvases, watched TONS of painting tutorials on Youtube (he still does) and he never looked back. His vision made sure he knows where he’s headed: he only needed to know how to put the ideas on canvas, a rather peculiar way of working, but somehow it did work. The public loved his handmade art much more than his AI “paintings”, even though those were selling like hotcakes.",
+            "A year later he had his first solo exhibition at one of the biggest gallery/auction houses in Hungary in 2025. The place was completely filled with fans who clearly enjoyed the world Shane created with his colorful cats.",
+            "Since then besides those famous cat paintings, he collaborated with a large Hungarian fashion brand to bring his cats into their stores all over the country. The past few months spent collaborating with Ervin “Hervé” Lóránt, a sculptor friend: they are working on several projects to take his art off the wall and bring it into real spaces."]},
+    "exh_title": {"hu": "KIÁLLÍTÁSOK", "en": "EXHIBITIONS"},
     "plugins_bio": {
         "hu": "Karakteres effektek és hangszerek, amiket elsősorban magamnak építek. A Space Cat Delay a Korg Monotron Delay önoszcilláló, zajos világából indult: nem tiszta delay, hanem hangulatgyár. A Berlin School és a Space Cat Reverb készülőben van.",
         "en": "Characterful effects and instruments, built first of all for myself. Space Cat Delay grew out of the self-oscillating, noisy world of the Korg Monotron Delay: not a clean delay but an atmosphere machine. Berlin School and Space Cat Reverb are on the way."},
@@ -54,6 +67,19 @@ CONTENT = {
     "delay_btn": {"hu": "LETÖLTÉS: HAMAROSAN", "en": "DOWNLOAD: COMING SOON"},
     "delay_fmt": {"hu": "VST3 · AU · macOS", "en": "VST3 · AU · macOS"},
 }
+
+EXHIBITIONS = [("2023", {"hu": "március", "en": "March"}, "Art & Antique Fair, Budapest, Hungary"),
+               ("2023", {"hu": "szeptember", "en": "September"}, "Jókai 7, Mindszentkalla, Hungary"),
+               ("2023", {"hu": "november", "en": "November"}, "Fashion Street, Budapest"),
+               ("2024", {"hu": "március", "en": "March"}, "Art & Antique Fair, Budapest, Hungary"),
+               ("2024", {"hu": "június", "en": "June"}, "Fishing On Orfű, Orfű, Hungary"),
+               ("2024", {"hu": "július", "en": "July"}, "Füred Art Week, Balatonfüred, Hungary"),
+               ("2024", {"hu": "augusztus", "en": "August"}, "STRAND Festival, Zamárdi, Hungary"),
+               ("2025", {"hu": "március", "en": "March"}, "Art & Antique Fair, Budapest, Hungary"),
+               ("2025", {"hu": "június", "en": "June"}, "Solo Exhibition – Bodo Gallery, Budapest, Hungary"),
+               ("2025", {"hu": "július", "en": "July"}, "Füred Art Week, Balatonfüred, Hungary"),
+               ("2025", {"hu": "december", "en": "December"}, "Szentendre Art Week, Szentendre, Hungary"),
+               ("2026", {"hu": "február", "en": "February"}, "Art & Antique Fair, Budapest, Hungary")]
 
 PAINTINGS = [("p06", "Wood-collage cat"), ("p03", "Black cat, red ears"), ("p01", "Upside-down cat"),
              ("p07", "Cat eyes"), ("p02", "Grey tabby"), ("p04", "Two happy cats"),
@@ -143,6 +169,11 @@ footer{padding:32px 20px 40px;font-size:13px;color:var(--mut);display:flex;justi
 .panel h2{margin:0;font-family:'Bowlby One',sans-serif;font-weight:400;font-size:clamp(34px,9vw,52px);line-height:1.05;color:#fff;-webkit-text-stroke:3px #111;paint-order:stroke fill}
 .panel p{margin:0;font-size:13px}
 .panel .go{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#111;flex:none}
+.exh{padding:8px 20px 0}
+.exh .r{display:flex;gap:14px;padding:12px 0;border-top:1px solid #2a2a2a;min-height:52px;align-items:baseline}
+.exh .d{width:104px;flex:none;font-size:13px;font-weight:700;color:var(--ac)}
+.exh .p{flex:1;font-size:15px;line-height:1.35}
+.bio+.bio{margin-top:16px}
 /* gallery */
 .gal{columns:2;column-gap:8px;padding:16px 8px 8px}
 .gal a{display:block;margin-bottom:8px;break-inside:avoid}
@@ -261,8 +292,12 @@ def build_hub(lang):
 def build_art(lang):
     subs = [(T["bio"][lang], "#bio"), (T["gallery"][lang], "#gallery")]
     gal = "".join(f'<a href="@ROOT@assets/img/{p}.jpg"><img loading="lazy" src="@ROOT@assets/img/{p}.jpg" alt="{e(alt)}"></a>' for p, alt in PAINTINGS)
+    paras = "".join(f'<p class="bio">{e(t)}</p>' for t in CONTENT["art_bio"][lang])
+    exh = "".join(f'<div class="r"><span class="d">{m[lang]} {y}</span><span class="p">{e(pl)}</span></div>' for y, m, pl in EXHIBITIONS)
     body = (top(lang, "art", subs, 2) +
-            f'<section id="bio" class="pad"><h1 class="t">ART</h1><p class="bio">{e(CONTENT["art_bio"][lang])}</p></section>'
+            f'<section id="bio" class="pad"><h1 class="t">ART</h1>{paras}</section>'
+            f'<section class="pad" style="padding-bottom:0"><div style="font-size:12px;font-weight:700;letter-spacing:.14em;color:#bbb">{CONTENT["exh_title"][lang]}</div></section>'
+            f'<div class="exh">{exh}</div>'
             f'<section id="gallery"><div class="gal">{gal}</div><div class="sig">–SHANE 54–</div></section>' + foot())
     return page(lang, "art/", "Art — Shane 54", body, ACCENT["art"], up=2)
 
