@@ -523,6 +523,7 @@ def build_music(lang):
                 continue
             rows += f'<details class="dg"><summary><span>{CATN[key][lang]}</span><em>{len(g)}</em></summary>'
             for y, t, c, l, k in g:
+                c = c or ("Myon & Shane 54" if head.startswith("MYON") else "Shane 54")
                 sub = " · ".join(x for x in (c, l) if x)
                 rows += f'<div class="r"><span class="y">{y}</span><span class="n"><b>{e(t)}</b><s>{e(sub)}</s></span><span class="tag">{k}</span></div>'
             rows += '</details>'
