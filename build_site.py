@@ -540,7 +540,7 @@ def build_art(lang):
     subs = [(T["bio"][lang], "#bio"), (T["gallery"][lang], "#gallery")]
     gal = "".join(f'<a href="@ROOT@assets/img/{p}.jpg"><img loading="lazy" src="@ROOT@assets/img/{p}.jpg" alt="{e(alt)}"></a>' for p, alt in PAINTINGS)
     paras = "".join(f'<p class="bio">{e(t)}</p>' for t in CONTENT["art_bio"][lang])
-    exh = "".join(f'<div class="r"><span class="d">{m[lang]} {y}</span><span class="p">{e(pl)}</span></div>' for y, m, pl in EXHIBITIONS)
+    exh = "".join(f'<div class="r"><span class="d">{m[lang]} {y}</span><span class="p">{e(pl)}</span></div>' for y, m, pl in reversed(EXHIBITIONS))
     body = (top(lang, "art", subs, 2) +
             f'<section id="bio" class="pad"><h1 class="t">ART</h1>{paras}</section>'
             f'<section class="pad" style="padding-bottom:0"><div style="font-size:12px;font-weight:700;letter-spacing:.14em;color:#bbb">{CONTENT["exh_title"][lang]}</div></section>'
@@ -664,7 +664,7 @@ def build_stories2(root=False):
     for pid, cap in PAINTINGS:
         with Image.open(SRC / "img" / f"{pid}.jpg") as im:
             D["paintings"].append([pid, cap, round(im.width / im.height, 3)])
-    D["exh"] = [[y, m, p] for y, m, p in EXHIBITIONS]
+    D["exh"] = [[y, m, p] for y, m, p in reversed(EXHIBITIONS)]
     D["videos"] = [list(v) for v in VIDEOS]
     disco = []
     for head, link, items in DISCO:
