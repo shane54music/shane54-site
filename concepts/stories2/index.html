@@ -120,8 +120,8 @@ function build(){
  add('soft',{txt:L.plugins_bio,k:t.software});
  add('soft',{k:'02 · SOFTWARE',h:'Space Cat<br>Delay',p:t.delay_fmt,img:'delay_ui',contain:1,btns:[['','⬇ '+t.delay_btn,'c',1],['../../'+lang+'/software/','→','o']]});
  add('music',{k:'03 · MUSIC',h:t.music,p:t.sub_music,img:'dj'});
- L.music_bio.forEach(function(p){add('music',{txt:p,k:t.music})});
  add('music',{spo:1,k:'03 · MUSIC · SPOTIFY'});
+ L.music_bio.forEach(function(p){add('music',{txt:p,k:t.music})});
  add('music',{k:'03 · MUSIC · '+t.disco,h:t.disco,p:'Shane 54 · Myon & Shane 54',img:'p09',btns:D.disco.map(function(g,i){return [null,g.name,'c',0,i]})});
  add('music',{k:'03 · MUSIC · PODCAST',h:'International<br>Departures',p:L.id_bio,img:'id_logo',contain:1,btns:[[null,'▶ PODCAST','c',0,'pod']]});
  add('anim',{k:'04 · ANIMATION',h:t.animation,p:t.sub_animation,img:'p08'});
