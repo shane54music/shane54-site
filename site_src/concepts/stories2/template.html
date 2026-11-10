@@ -93,7 +93,7 @@ html,body{margin:0;height:100%;background:#000;overflow:hidden;font-family:Inter
 <div class="sheet" id="sh-disco"><div class="sh-h"><b id="sh-disco-t"></b><button class="sh-x" data-close>×</button></div><div class="sh-b" id="disco-b"></div></div>
 <div class="sheet" id="sh-pod"><div class="sh-h"><b>INTERNATIONAL DEPARTURES</b><button class="sh-x" data-close>×</button></div><div class="sh-b"><div id="np"></div><div id="eps"></div></div></div>
 <button id="fab" aria-label="Player"><span class="eq"><i></i><i></i><i></i></span><b>♪</b></button>
-<div id="mp"><div class="mph"><div class="mpt"><button data-tab="sp" class="on">SPOTIFY</button><button data-tab="pod">PODCAST</button></div><button class="sh-x" data-mpclose>×</button></div>
+<div id="mp"><div class="mph"><div class="mpt"><button data-tab="sp" class="on">SPOTIFY</button><button data-tab="pod" id="tabpod">PODCAST ARCHIVE</button></div><button class="sh-x" data-mpclose>×</button></div>
 <div id="mp-sp" class="mpp"><div id="spc"></div></div><div id="mp-pod" class="mpp" hidden></div></div>
 <script>
 var D=/*DATA*/null;
@@ -123,7 +123,7 @@ function build(){
  add('music',{spo:1,k:'03 · MUSIC · SPOTIFY'});
  L.music_bio.forEach(function(p){add('music',{txt:p,k:t.music})});
  add('music',{k:'03 · MUSIC · '+t.disco,h:t.disco,p:'Shane 54 · Myon & Shane 54',img:'p09',btns:D.disco.map(function(g,i){return [null,g.name,'c',0,i]})});
- add('music',{k:'03 · MUSIC · PODCAST',h:'International<br>Departures',p:L.id_bio,img:'id_logo',contain:1,btns:[[null,'▶ PODCAST','c',0,'pod']]});
+ add('music',{k:'03 · MUSIC · '+(lang=='hu'?'PODCAST ARCHÍV':'PODCAST ARCHIVE'),h:'International<br>Departures',p:L.id_bio,img:'id_logo',contain:1,btns:[[null,'▶ '+(lang=='hu'?'PODCAST ARCHÍV':'PODCAST ARCHIVE'),'c',0,'pod']]});
  add('anim',{k:'04 · ANIMATION',h:t.animation,p:t.sub_animation,img:'p08'});
  add('anim',{txt:L.anim_bio,k:t.animation});
  D.videos.forEach(function(v){add('anim',{vid:v,k:'04 · '+t.videos})});
@@ -144,7 +144,7 @@ function render(keep){
   var form='';if(c.club){var hid=Object.keys(D.club.hidden).map(function(k){return '<input type="hidden" name="'+h(k)+'" value="'+h(D.club.hidden[k])+'">'}).join('');
    form='<form class="club" action="'+h(D.club.action)+'" method="post">'+hid+'<input type="email" name="'+h(D.club.field)+'" required placeholder="'+h(D.club.t.email[lang])+'"><label class="cn"><input type="checkbox" required><span>'+h(D.club.t.consent[lang])+'</span></label><button class="btn c" type="submit">'+h(D.club.t.btn[lang])+'</button></form>'}
   return '<div class="card'+(c.contain?' contain':'')+(c.img=='id_logo'?' idc':'')+'" style="--c:'+col+'">'+(c.contain?'':'<img class="bgb" src="'+I+c.img+'.jpg" alt="">')+'<img class="bg" '+(c.contain?'':'onload="fit(this)" ')+'src="'+I+c.img+(c.img=='id_logo'?'.png':'.jpg')+'" alt="">'+(c.img=='id_logo'?'':'<div class="sh"></div>')+'<div class="tx"><small>'+h(c.k)+(c.cap?' · '+h(c.cap):'')+'</small>'+(c.h&&c.img!='id_logo'?'<h1 style="font-size:'+fsz(c.h)+'px">'+c.h+'</h1>':'')+(c.p?'<p>'+h(c.p)+'</p>':'')+b+form+'</div>'+(c.hint?'<div class="hint">'+(lang=='hu'?'KOPPINTS A FOLYTATÁSHOZ →':'TAP TO CONTINUE →')+'</div>':'')+'</div>'}).join('');
- document.getElementById('lg').textContent=lang=='hu'?'EN':'HU';
+ document.getElementById('lg').textContent=lang=='hu'?'EN':'HU';document.getElementById('tabpod').textContent=(lang=='hu'?'PODCAST ARCHÍV':'PODCAST ARCHIVE');
  document.getElementById('sc').innerHTML=[['intro',lang=='hu'?'KEZDŐ':'HOME'],['art',L.t.art],['soft',L.t.software],['music',L.t.music],['anim',L.t.animation],['club','JOIN']].map(function(g){return '<button data-g="'+g[0]+'">'+h(g[1])+'</button>'}).join('');
  document.getElementById('disco-b').innerHTML='';document.getElementById('sh-disco-t').textContent=L.t.disco;
  [].forEach.call(document.querySelectorAll('.card .bg'),function(i){if(i.complete&&i.naturalWidth)fit(i)});
