@@ -16,6 +16,9 @@ html,body{margin:0;height:100%;background:#000;overflow:hidden;font-family:Inter
 .card.fit .bgb{display:block}
 .card.fit .bg{object-fit:contain;top:12%;height:58%}
 .card.fit.on .bg:not(.still){animation:none}
+.pairc .pr{position:absolute;left:0;right:0;top:calc(84px + env(safe-area-inset-top));bottom:70px;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 10px}
+.pairc figure{margin:0;position:relative;flex:0 1 auto;min-height:0}.pairc figure img{display:block;width:100%;height:auto;max-height:100%;border-radius:6px;box-shadow:0 10px 30px #0009}
+.pairc figcaption{position:absolute;left:8px;bottom:8px;background:#000a;backdrop-filter:blur(6px);padding:4px 10px;border-radius:999px;font:700 11px Inter;letter-spacing:.04em}
 .card.contain .bg{object-fit:contain;padding:90px 0 36%;background:#0d1020}.card.contain.idc .bg{padding:80px 0 190px;background:#000}
 .card .sh{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,0) 58%,rgba(0,0,0,.5));pointer-events:none}
 .tx{position:absolute;left:20px;right:20px;bottom:calc(34px + env(safe-area-inset-bottom));z-index:3;pointer-events:none}
@@ -100,7 +103,11 @@ function build(){
  add('intro',{k:'SHANE 54',h:'Shane<br>54',p:'ART · SOFTWARE · MUSIC · ANIMATION',img:'p01',hint:1});
  add('art',{k:'01 · ART',h:t.art,p:t.sub_art,img:'p03'});
  L.art_bio.forEach(function(p,i){add('art',{txt:p,k:t.art})});
- D.paintings.forEach(function(p,i){add('art',{k:'№ '+(i+1)+' / '+D.paintings.length,img:p[0],cap:p[1],dur:5000})});
+ var pend=null,N=D.paintings.length;
+ D.paintings.forEach(function(p,i){
+  if(p[2]>.85){if(pend){add('art',{pair:[pend[0],p],k:'№ '+(pend[1]+1)+' & '+(i+1)+' / '+N,dur:6500});pend=null}else pend=[p,i]}
+  else add('art',{k:'№ '+(i+1)+' / '+N,img:p[0],cap:p[1],dur:5000})});
+ if(pend)add('art',{k:'№ '+N+' / '+N,img:pend[0][0],cap:pend[0][1],dur:5000});
  add('art',{exh:1,k:t.exh_title});
  add('art',{k:'01 · ART',h:t.gallery,p:t.sub_art,img:'p05',btns:[['../../'+lang+'/art/',t.gallery+' →','c']]});
  add('soft',{k:'02 · SOFTWARE',h:'Space Cat<br>Delay',p:t.delay_tag,img:'delay_ui',contain:1});
@@ -123,6 +130,7 @@ function render(keep){
  el.innerHTML=C.map(function(c,i){var col=SEC[c.g];
   if(c.txt){var n=c.txt.length,fs=n>260?20:n>150?23:n>70?27:32;return '<div class="card txt" style="--c:'+col+';--fs:'+fs+'px"><div class="body"><small>'+h(c.k)+'</small><div class="q">'+h(c.txt)+'</div></div></div>'}
   if(c.exh)return '<div class="card txt" style="--c:'+col+'"><div class="body"><small>'+h(c.k)+'</small><ul class="exh">'+D.exh.map(function(x){return '<li><b>'+x[0]+'</b><i>'+h(x[1][lang])+'</i><span>'+h(x[2])+'</span></li>'}).join('')+'</ul></div></div>';
+  if(c.pair)return '<div class="card pairc" style="--c:'+col+'"><img class="bgb" src="'+I+c.pair[0][0]+'.jpg" alt="" style="display:block"><div class="pr">'+c.pair.map(function(q){return '<figure><img src="'+I+q[0]+'.jpg" alt=""><figcaption>'+h(q[1])+'</figcaption></figure>'}).join('')+'</div><div class="tx"><small>'+h(c.k)+'</small></div></div>';
   if(c.vid)return '<div class="card" style="--c:'+col+'"><div class="vc"><div class="th" data-yt="'+c.vid[0]+'"><img src="https://i.ytimg.com/vi/'+c.vid[0]+'/hqdefault.jpg" alt=""><button class="pl" aria-label="play">▶</button></div></div><div class="tx"><small>'+h(c.k)+'</small><h1 class="s">'+h(c.vid[1])+'</h1><p>'+h(c.vid[2])+'</p></div></div>';
   var b=(c.btns||[]).map(function(x){return x[0]===null?'<button class="btn '+x[2]+'" data-open="'+x[4]+'">'+h(x[1])+'</button>':(x[3]?'<button class="btn c" disabled>'+h(x[1])+'</button>':'<a class="btn '+x[2]+'" href="'+x[0]+'">'+h(x[1])+'</a>')}).join('');
   var form='';if(c.club){var hid=Object.keys(D.club.hidden).map(function(k){return '<input type="hidden" name="'+h(k)+'" value="'+h(D.club.hidden[k])+'">'}).join('');

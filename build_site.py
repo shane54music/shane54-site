@@ -659,7 +659,11 @@ def build_stories2(root=False):
         D[l]["t"]["delay_tag"] = CONTENT["delay_tag"][l]
         D[l]["t"]["delay_btn"] = CONTENT["delay_btn"][l]
         D[l]["t"]["delay_fmt"] = CONTENT["delay_fmt"][l]
-    D["paintings"] = [list(p) for p in PAINTINGS]
+    from PIL import Image
+    D["paintings"] = []
+    for pid, cap in PAINTINGS:
+        with Image.open(SRC / "img" / f"{pid}.jpg") as im:
+            D["paintings"].append([pid, cap, round(im.width / im.height, 3)])
     D["exh"] = [[y, m, p] for y, m, p in EXHIBITIONS]
     D["videos"] = [list(v) for v in VIDEOS]
     disco = []
