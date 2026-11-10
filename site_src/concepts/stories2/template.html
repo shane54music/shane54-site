@@ -19,6 +19,7 @@ html,body{margin:0;height:100%;background:#000;overflow:hidden;font-family:Inter
 .pairc .pr{position:absolute;left:0;right:0;top:calc(84px + env(safe-area-inset-top));bottom:70px;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 10px}
 .pairc figure{margin:0;position:relative;flex:0 1 auto;min-height:0}.pairc figure img{display:block;width:100%;height:auto;max-height:100%;border-radius:6px;box-shadow:0 10px 30px #0009}
 .pairc figcaption{position:absolute;left:8px;bottom:8px;background:#000a;backdrop-filter:blur(6px);padding:4px 10px;border-radius:999px;font:700 11px Inter;letter-spacing:.04em}
+.spw{width:100%;padding:0 12px;margin-top:-40px}.spw iframe{display:block;width:100%;height:352px;border:0;border-radius:14px}
 .card.contain .bg{object-fit:contain;padding:90px 0 36%;background:#0d1020}.card.contain.idc .bg{padding:80px 0 190px;background:#000}
 .card .sh{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,0) 58%,rgba(0,0,0,.5));pointer-events:none}
 .tx{position:absolute;left:20px;right:20px;bottom:calc(34px + env(safe-area-inset-bottom));z-index:3;pointer-events:none}
@@ -115,6 +116,7 @@ function build(){
  add('soft',{k:'02 · SOFTWARE',h:'Space Cat<br>Delay',p:t.delay_fmt,img:'delay_ui',contain:1,btns:[['','⬇ '+t.delay_btn,'c',1],['../../'+lang+'/software/','→','o']]});
  add('music',{k:'03 · MUSIC',h:t.music,p:t.sub_music,img:'dj'});
  L.music_bio.forEach(function(p){add('music',{txt:p,k:t.music})});
+ add('music',{spo:1,k:'03 · MUSIC · SPOTIFY'});
  add('music',{k:'03 · MUSIC · '+t.disco,h:t.disco,p:'Shane 54 · Myon & Shane 54',img:'p09',btns:D.disco.map(function(g,i){return [null,g.name,'c',0,i]})});
  add('music',{k:'03 · MUSIC · PODCAST',h:'International<br>Departures',p:L.id_bio,img:'id_logo',contain:1,btns:[[null,'▶ PODCAST','c',0,'pod']]});
  add('anim',{k:'04 · ANIMATION',h:t.animation,p:t.sub_animation,img:'p08'});
@@ -131,6 +133,7 @@ function render(keep){
   if(c.txt){var n=c.txt.length,fs=n>260?20:n>150?23:n>70?27:32;return '<div class="card txt" style="--c:'+col+';--fs:'+fs+'px"><div class="body"><small>'+h(c.k)+'</small><div class="q">'+h(c.txt)+'</div></div></div>'}
   if(c.exh)return '<div class="card txt" style="--c:'+col+'"><div class="body"><small>'+h(c.k)+'</small><ul class="exh">'+D.exh.map(function(x){return '<li><b>'+x[0]+'</b><i>'+h(x[1][lang])+'</i><span>'+h(x[2])+'</span></li>'}).join('')+'</ul></div></div>';
   if(c.pair)return '<div class="card pairc" style="--c:'+col+'"><img class="bgb" src="'+I+c.pair[0][0]+'.jpg" alt="" style="display:block"><div class="pr">'+c.pair.map(function(q){return '<figure><img src="'+I+q[0]+'.jpg" alt=""><figcaption>'+h(q[1])+'</figcaption></figure>'}).join('')+'</div><div class="tx"><small>'+h(c.k)+'</small></div></div>';
+  if(c.spo)return '<div class="card" style="--c:'+col+';background:radial-gradient(circle at 50% 30%,#1db95433,#000 70%)"><div class="vc"><div class="spw" data-sp="'+D.spotify+'"></div></div><div class="tx"><small>'+h(c.k)+'</small><h1 class="s">Spotify</h1><a class="btn c" href="https://open.spotify.com/artist/'+D.spotify+'" target="_blank" rel="noopener">▶ Spotify →</a></div></div>';
   if(c.vid)return '<div class="card" style="--c:'+col+'"><div class="vc"><div class="th" data-yt="'+c.vid[0]+'"><img src="https://i.ytimg.com/vi/'+c.vid[0]+'/hqdefault.jpg" alt=""><button class="pl" aria-label="play">▶</button></div></div><div class="tx"><small>'+h(c.k)+'</small><h1 class="s">'+h(c.vid[1])+'</h1><p>'+h(c.vid[2])+'</p></div></div>';
   var b=(c.btns||[]).map(function(x){return x[0]===null?'<button class="btn '+x[2]+'" data-open="'+x[4]+'">'+h(x[1])+'</button>':(x[3]?'<button class="btn c" disabled>'+h(x[1])+'</button>':'<a class="btn '+x[2]+'" href="'+x[0]+'">'+h(x[1])+'</a>')}).join('');
   var form='';if(c.club){var hid=Object.keys(D.club.hidden).map(function(k){return '<input type="hidden" name="'+h(k)+'" value="'+h(D.club.hidden[k])+'">'}).join('');
@@ -142,11 +145,11 @@ function render(keep){
  [].forEach.call(document.querySelectorAll('.card .bg'),function(i){if(i.complete&&i.naturalWidth)fit(i)});
  go(Math.min(keep||0,cards.length-1))}
 function go(i){i=Math.max(0,Math.min(cards.length-1,i));cur=i;var cs=document.querySelectorAll('.card');
- [].forEach.call(cs,function(c,j){c.classList.toggle('on',j==i);c.style.pointerEvents=j==i?'auto':'none';if(j!=i){var th=c.querySelector('.th');if(th&&th.dataset.on){th.innerHTML='<img src="https://i.ytimg.com/vi/'+th.dataset.yt+'/hqdefault.jpg" alt=""><button class="pl">▶</button>';th.dataset.on=''}}});
+ [].forEach.call(cs,function(c,j){c.classList.toggle('on',j==i);c.style.pointerEvents=j==i?'auto':'none';var sw=c.querySelector('.spw');if(sw)sw.innerHTML=j==i?'<iframe src="https://open.spotify.com/embed/artist/'+sw.dataset.sp+'" allow="autoplay;clipboard-write;encrypted-media;fullscreen;picture-in-picture" title="Spotify"></iframe>':'';if(j!=i){var th=c.querySelector('.th');if(j!=i&&th&&th.dataset.on){th.innerHTML='<img src="https://i.ytimg.com/vi/'+th.dataset.yt+'/hqdefault.jpg" alt=""><button class="pl">▶</button>';th.dataset.on=''}}});
  var gr=groups.filter(function(g){return i>=g.s&&i<=g.e})[0],col=SEC[cards[i].g];document.documentElement.style.setProperty('--c',col);
  var pr=document.getElementById('prog');pr.innerHTML='';for(var k=gr.s;k<=gr.e;k++)pr.insertAdjacentHTML('beforeend','<i><b style="width:'+(k<i?'100%':'0')+'"></b></i>');
  [].forEach.call(document.querySelectorAll('#sc button'),function(b){b.className=b.dataset.g==cards[i].g?'on':''});
- var cd=cards[i];dur=cd.vid||cd.club?0:(cd.dur||(cd.txt?Math.min(14000,4000+cd.txt.length*38):cd.exh?9000:cd.btns&&cd.btns.length?9e3:5500));rem=dur;startT()}
+ var cd=cards[i];dur=cd.vid||cd.club||cd.spo?0:(cd.dur||(cd.txt?Math.min(14000,4000+cd.txt.length*38):cd.exh?9000:cd.btns&&cd.btns.length?9e3:5500));rem=dur;startT()}
 function startT(){clearTimeout(tm);var b=document.querySelector('#prog i:nth-child('+(cur-groups.filter(function(g){return cur>=g.s&&cur<=g.e})[0].s+1)+') b');if(!b)return;
  b.style.transition='none';var done=1-(dur?rem/dur:1);b.style.width=(done*100)+'%';
  if(!dur||held||sheets)return;void b.offsetWidth;b.style.transition='width '+rem+'ms linear';b.style.width='100%';T0=Date.now();tm=setTimeout(function(){go(cur+1)},rem)}

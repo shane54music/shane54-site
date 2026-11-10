@@ -674,6 +674,7 @@ def build_stories2(root=False):
             groups[disco_cat(it)].append([y, t, c or head.split(" · ")[0].title().replace("&", "&"), lab])
         disco.append({"name": head.split(" · ")[0].title().replace("Myon & Shane 54", "Myon & Shane 54"), "link": link, "groups": groups})
     D["disco"] = disco
+    D["spotify"] = SPOTIFY
     D["club"] = {"action": CLUB["action"], "field": CLUB["field"], "hidden": CLUB["hidden"], "t": CLUB_T}
     out = tpl.replace("/*DATA*/null", json.dumps(D, ensure_ascii=False))
     if root:
