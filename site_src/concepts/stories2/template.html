@@ -12,6 +12,10 @@ html,body{margin:0;height:100%;background:#000;overflow:hidden;font-family:Inter
 .card.on{opacity:1}
 .card .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .card.on .bg:not(.still){animation:kb 10s ease-out forwards}@keyframes kb{from{transform:scale(1)}to{transform:scale(1.1)}}
+.card .bgb{display:none;position:absolute;left:-30px;top:-30px;width:calc(100% + 60px);height:calc(100% + 60px);object-fit:cover;filter:blur(26px) brightness(.55) saturate(1.25)}
+.card.fit .bgb{display:block}
+.card.fit .bg{object-fit:contain;top:12%;height:58%}
+.card.fit.on .bg:not(.still){animation:none}
 .card.contain .bg{object-fit:contain;padding:90px 0 36%;background:#0d1020}.card.contain.idc .bg{padding:80px 0 190px;background:#000}
 .card .sh{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,0) 58%,rgba(0,0,0,.5));pointer-events:none}
 .tx{position:absolute;left:20px;right:20px;bottom:calc(34px + env(safe-area-inset-bottom));z-index:3;pointer-events:none}
@@ -112,6 +116,7 @@ function build(){
  add('club',{club:1,k:D.club.t.title[lang],h:'Join<br>the club',p:D.club.t.text[lang],img:'p02'});
  return C}
 function fsz(hh){var w=hh.split(/<br>|\s+/),m=0;w.forEach(function(x){m=Math.max(m,x.length)});return Math.min(104,Math.max(40,Math.floor(340/(m*.5))))}
+function fit(i){if(i.naturalWidth/i.naturalHeight>.85)i.parentNode.classList.add('fit')}
 function clrGroups(){groups=[];cards.forEach(function(c,i){if(!groups.length||groups[groups.length-1].g!=c.g)groups.push({g:c.g,s:i});groups[groups.length-1].e=i})}
 function render(keep){
  var C=build();cards=C;clrGroups();var el=document.getElementById('cards');
@@ -122,10 +127,11 @@ function render(keep){
   var b=(c.btns||[]).map(function(x){return x[0]===null?'<button class="btn '+x[2]+'" data-open="'+x[4]+'">'+h(x[1])+'</button>':(x[3]?'<button class="btn c" disabled>'+h(x[1])+'</button>':'<a class="btn '+x[2]+'" href="'+x[0]+'">'+h(x[1])+'</a>')}).join('');
   var form='';if(c.club){var hid=Object.keys(D.club.hidden).map(function(k){return '<input type="hidden" name="'+h(k)+'" value="'+h(D.club.hidden[k])+'">'}).join('');
    form='<form class="club" action="'+h(D.club.action)+'" method="post">'+hid+'<input type="email" name="'+h(D.club.field)+'" required placeholder="'+h(D.club.t.email[lang])+'"><label class="cn"><input type="checkbox" required><span>'+h(D.club.t.consent[lang])+'</span></label><button class="btn c" type="submit">'+h(D.club.t.btn[lang])+'</button></form>'}
-  return '<div class="card'+(c.contain?' contain':'')+(c.img=='id_logo'?' idc':'')+'" style="--c:'+col+'"><img class="bg" src="'+I+c.img+(c.img=='id_logo'?'.png':'.jpg')+'" alt="">'+(c.img=='id_logo'?'':'<div class="sh"></div>')+'<div class="tx"><small>'+h(c.k)+(c.cap?' · '+h(c.cap):'')+'</small>'+(c.h&&c.img!='id_logo'?'<h1 style="font-size:'+fsz(c.h)+'px">'+c.h+'</h1>':'')+(c.p?'<p>'+h(c.p)+'</p>':'')+b+form+'</div>'+(c.hint?'<div class="hint">'+(lang=='hu'?'KOPPINTS A FOLYTATÁSHOZ →':'TAP TO CONTINUE →')+'</div>':'')+'</div>'}).join('');
+  return '<div class="card'+(c.contain?' contain':'')+(c.img=='id_logo'?' idc':'')+'" style="--c:'+col+'">'+(c.contain?'':'<img class="bgb" src="'+I+c.img+'.jpg" alt="">')+'<img class="bg" '+(c.contain?'':'onload="fit(this)" ')+'src="'+I+c.img+(c.img=='id_logo'?'.png':'.jpg')+'" alt="">'+(c.img=='id_logo'?'':'<div class="sh"></div>')+'<div class="tx"><small>'+h(c.k)+(c.cap?' · '+h(c.cap):'')+'</small>'+(c.h&&c.img!='id_logo'?'<h1 style="font-size:'+fsz(c.h)+'px">'+c.h+'</h1>':'')+(c.p?'<p>'+h(c.p)+'</p>':'')+b+form+'</div>'+(c.hint?'<div class="hint">'+(lang=='hu'?'KOPPINTS A FOLYTATÁSHOZ →':'TAP TO CONTINUE →')+'</div>':'')+'</div>'}).join('');
  document.getElementById('lg').textContent=lang=='hu'?'EN':'HU';
  document.getElementById('sc').innerHTML=[['intro',lang=='hu'?'KEZDŐ':'HOME'],['art',L.t.art],['soft',L.t.software],['music',L.t.music],['anim',L.t.animation],['club','JOIN']].map(function(g){return '<button data-g="'+g[0]+'">'+h(g[1])+'</button>'}).join('');
  document.getElementById('disco-b').innerHTML='';document.getElementById('sh-disco-t').textContent=L.t.disco;
+ [].forEach.call(document.querySelectorAll('.card .bg'),function(i){if(i.complete&&i.naturalWidth)fit(i)});
  go(Math.min(keep||0,cards.length-1))}
 function go(i){i=Math.max(0,Math.min(cards.length-1,i));cur=i;var cs=document.querySelectorAll('.card');
  [].forEach.call(cs,function(c,j){c.classList.toggle('on',j==i);c.style.pointerEvents=j==i?'auto':'none';if(j!=i){var th=c.querySelector('.th');if(th&&th.dataset.on){th.innerHTML='<img src="https://i.ytimg.com/vi/'+th.dataset.yt+'/hqdefault.jpg" alt=""><button class="pl">▶</button>';th.dataset.on=''}}});
