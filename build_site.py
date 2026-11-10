@@ -89,7 +89,8 @@ EXHIBITIONS = [("2023", {"hu": "március", "en": "March"}, "Art & Antique Fair, 
                ("2025", {"hu": "június", "en": "June"}, "Solo Exhibition – Bodo Gallery, Budapest, Hungary"),
                ("2025", {"hu": "július", "en": "July"}, "Füred Art Week, Balatonfüred, Hungary"),
                ("2025", {"hu": "december", "en": "December"}, "Szentendre Art Week, Szentendre, Hungary"),
-               ("2026", {"hu": "február", "en": "February"}, "Art & Antique Fair, Budapest, Hungary")]
+               ("2026", {"hu": "február", "en": "February"}, "Art & Antique Fair, Budapest, Hungary"),
+               ("2026", {"hu": "július", "en": "July"}, "Füred Art Week, Balatonfüred, Hungary")]
 
 PAINTINGS = [("p06", "Wood-collage cat"), ("p03", "Black cat, red ears"), ("p01", "Upside-down cat"),
              ("p07", "Cat eyes"), ("p02", "Grey tabby"), ("p04", "Two happy cats"),
