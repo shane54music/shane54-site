@@ -1,0 +1,59 @@
+
+:root{--bg:#070a16;--panel:#0e1426;--line:#212a47;--ink:#eef1ff;--mute:#9aa3c7;--o:#ff9a1f;--c:#35d3f5;--g:#9be83c;--p:#ff4fa3}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif;
+background-image:radial-gradient(1px 1px at 12% 18%,#fff8,transparent),radial-gradient(1px 1px at 78% 8%,#fff6,transparent),radial-gradient(1.5px 1.5px at 40% 60%,#fff5,transparent),radial-gradient(1px 1px at 90% 70%,#fff7,transparent),radial-gradient(1px 1px at 22% 85%,#fff5,transparent),radial-gradient(1px 1px at 62% 35%,#fff6,transparent);background-size:520px 520px;}
+a{color:inherit}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+h1,h2,h3,.cond{font-family:'Barlow Condensed',Impact,sans-serif;text-transform:uppercase;letter-spacing:.04em;line-height:1.05}
+header{position:sticky;top:0;z-index:10;background:#070a16ee;backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+.logo{display:flex;align-items:center}.logo img{height:22px;display:block}
+nav{display:flex;gap:20px;font-family:'Barlow Condensed';font-weight:600;font-size:18px;letter-spacing:.08em;text-transform:uppercase}
+nav a{text-decoration:none;color:var(--mute)}nav a:hover{color:var(--ink)}
+.hero{padding:48px 0 24px;text-align:center}
+.eyebrow{font-family:'Barlow Condensed';letter-spacing:.3em;color:var(--c);font-size:16px;text-transform:uppercase}
+.hero h1{font-size:clamp(44px,9vw,92px);margin:10px 0 14px}
+.hero h1 b{color:var(--o)}
+.hero p.lead{color:var(--mute);max-width:620px;margin:0 auto 26px;font-size:18px}
+.shot{margin:34px auto 0;max-width:1000px;border-radius:14px;border:1px solid var(--line);box-shadow:0 0 80px #35d3f522,0 30px 80px #000a;display:block;width:100%;height:auto}
+.btn{display:inline-block;font-family:'Barlow Condensed';font-weight:700;font-size:20px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:12px 26px;border-radius:999px;border:2px solid var(--o);background:var(--o);color:#1a1100;cursor:pointer}
+.btn:hover{filter:brightness(1.1)}
+.btn.ghost{background:transparent;color:var(--o)}
+.btn.off{background:transparent;border-color:var(--line);color:var(--mute);cursor:default;filter:none}
+section{padding:54px 0}
+h2{font-size:clamp(30px,5vw,46px);margin-bottom:22px}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none}
+.card .bar{height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-family:'Barlow Condensed';font-weight:700;font-size:22px;letter-spacing:.14em;text-transform:uppercase;color:#10131f}
+.card .bar small{font-size:14px;letter-spacing:.1em;opacity:.8}
+.card .body{padding:16px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card .body p{color:var(--mute);font-size:15px;flex:1}
+.card .tag{font-family:'Barlow Condensed';letter-spacing:.12em;text-transform:uppercase;color:var(--ink);font-size:17px}
+.card.soon{opacity:.82}
+.card:hover{border-color:#3a4670}
+.panels{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.panel h3{padding:10px 16px;font-size:24px;letter-spacing:.16em;color:#10131f}
+.panel ul{list-style:none;padding:14px 16px}
+.panel li{padding:6px 0;color:var(--mute);font-size:15px;border-bottom:1px dashed #1a2240}
+.panel li:last-child{border:0}.panel li b{color:var(--ink);font-weight:600}
+.buybox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:18px;grid-template-columns:1fr auto;align-items:center;margin-top:28px}
+.buybox dl{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;font-size:15px}
+.buybox dt{color:var(--mute)}
+.price{font-family:'Barlow Condensed';font-size:40px;font-weight:700;color:var(--o)}
+table{width:100%;border-collapse:collapse}td,th{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;font-size:15px}th{color:var(--mute);font-weight:500;width:36%}
+details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-family:'Barlow Condensed';font-size:21px;letter-spacing:.06em;text-transform:uppercase}
+details p,details ol{color:var(--mute);margin-top:10px;font-size:15px}details ol{padding-left:20px}
+code{background:#0b1226;border:1px solid var(--line);padding:1px 6px;border-radius:5px;font-size:13px;color:var(--c)}
+.prose p{color:var(--mute);margin-bottom:14px;max-width:720px}.prose h2{margin-top:34px;font-size:32px}
+footer{border-top:1px solid var(--line);padding:30px 0 50px;color:var(--mute);font-size:14px;margin-top:30px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}
+footer a{text-decoration:none}footer a:hover{color:var(--ink)}
+.join{background:linear-gradient(135deg,#1a1230,#0d1a33);border:1px solid var(--line);border-radius:16px;padding:30px;text-align:center}
+.join p{color:var(--mute);margin:8px 0 18px}
+nav a{white-space:nowrap}
+h1,h2,h3,.cond,.btn,summary,.card .bar{font-family:'Barlow Condensed','Arial Narrow',Impact,sans-serif}
+@media(max-width:640px){nav{gap:14px;font-size:16px}nav a:last-child{display:none}header .wrap{padding:0 16px}.buybox{grid-template-columns:1fr}.logo img{height:18px}}
